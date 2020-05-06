@@ -1,0 +1,24 @@
+//Estructura del sistema
+
+-build
+-docs
+-production
+	//Los que tengan estos prefijos
+	//V_= Son modulos
+	//F_= Son vistas que complementan a los modulos
+	//B_= Son php que complementan a las vistas (F_)
+	-css
+	-images
+	-includes
+		°footer.html(El footer)
+		°header.html(Son los css)
+		°navbar.html(Barra lateral izquierda)
+		°scripts.html(Son los scripts de javascript, se pueden agregar mas)
+		°top_navigation.html(barra superior)
+	-js
+	-modulos
+		-frontend(F_)
+		-backend(B_)
+
+-vendors
+etc
