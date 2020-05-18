@@ -1,14 +1,14 @@
 <?php
+//invocacion a los metodos
+require_once "models/enlaces.php";
+require_once "models/crud.php";
+require_once "models/crudProd.php";
 
-//Invocación a los métodos
-require_once 'models/enlaces.php';
-require_once 'models/crud.php';
-require_once 'models/crudProduct.php';
+//Controlador
+//Creacion de objetos, logica del negocio
+require_once "controllers/controller.php";
 
-//CONTROLADOR
-//Creación de los objetos, la lógica del negocio
-require_once 'controllers/controller.php';
-
-//muestra la función o método "página"
-$mvc->showPage();
+$mvc = new MvcController();
+//muestra la función o método página que se encuentra en controllers/controller.php
+$mvc->pagina();
 ?>
