@@ -1,8 +1,8 @@
 <?php
-	class Conexion{
-		public static function conectar(){
-			$link = new PDO("mysql:host=localhost;dbname=basedatos","root","");
-			return $link;
-		}
-	}
+ class Conexion{
+ 	public static function conectar(){
+ 		$link = new PDO("mysql:host=localhost;dbname=basedatos","root","");
+ 		return $link;
+ 	}
+ }
 ?>
