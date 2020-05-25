@@ -1,6 +1,7 @@
 <?php
 //mostrareros la salida al usuario y atraves de el enviaremos las distintas acciones que el usuario envie al controlador
 
+ob_start()
 //invocacion a los metodos
 require_once "models/enlaces.php";
 require_once "models/crud.php";
