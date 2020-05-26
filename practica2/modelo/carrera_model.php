@@ -1,25 +1,24 @@
 <?php
     
-    class estudiante_model{
+    class carrera_model{
         private $DB;
-        private $estudiantes;
+        private $carreras;
 
-        //Se obtienen los registros de la tabla para poder visualizarlos
         function __construct(){
             $this->DB=Database::connect();
         }
 
-        //Función con query de inserción a la BD
+        //Se obtienen los registros de la tabla para poder visualizarlos
         function get(){
-            $sql = 'SELECT e.id, e.cedula, e.nombre, e.apellidos, e.promedio, e.edad, e.fecha, c.nombre AS uni FROM estudiante e INNER JOIN carrera c WHERE e.id_carrera = c.id';
+            $sql = 'SELECT c.id, c.nombre AS carrera, u.nombre AS universidad, c.codigo, c.descripcion FROM carrera c INNER JOIN universidad u WHERE c.id_universidad = u.id';
             $fila=$this->DB->query($sql);
-            $this->estudiantes=$fila;
-            return  $this->estudiantes;
+            $this->carreras=$fila;
+            return $this->carreras;
         }
 
-        //Función para obtener las carreras y mostrarlas en un select en el registro de usuarios
-        function getC(){
-            $sql= 'SELECT id, nombre FROM carrera ORDER BY id DESC';
+        //Función para obtener el registro de las universidades y poder usarlos en el registro
+        function getU(){
+            $sql= 'SELECT id, nombre FROM universidad ORDER BY id DESC';
             $fila=$this->DB->query($sql);
             $uni=$fila;
             return  $uni;
@@ -29,10 +28,10 @@
         function create($data){
 
             $this->DB->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            $sql="INSERT INTO estudiante(cedula,nombre,apellidos,promedio,edad,fecha,id_carrera)VALUES (?,?,?,?,?,?,?)";
+            $sql="INSERT INTO carrera(nombre,codigo,descripcion,id_universidad)VALUES (?,?,?,?)";
 
             $query = $this->DB->prepare($sql);
-            $query->execute(array($data['cedula'],$data['nombre'],$data['apellidos'],$data['promedio'],$data['edad'],$data['fecha'],$data['carrera']));
+            $query->execute(array($data['nombre'],$data['codigo'],$data['descripcion'],$data['universidad']));
             Database::disconnect();       
 
         }
@@ -40,7 +39,7 @@
         //Función para obtener los datos de un registro al momento de editar
         function get_id($id){
             $this->DB->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            $sql = "SELECT * FROM estudiante where id = ?";
+            $sql = "SELECT c.id, c.nombre, c.codigo, c.descripcion ,c.id_universidad FROM carrera c where c.id = ?";
             $q = $this->DB->prepare($sql);
             $q->execute(array($id));
             $data = $q->fetch(PDO::FETCH_ASSOC);
@@ -50,9 +49,9 @@
         //Función para actualizar datos de un registro
         function update($data,$date){
             $this->DB->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            $sql = "UPDATE estudiante  set  cedula=?, nombre =?, apellidos=?,promedio=?, edad=?, fecha=?, id_carrera = ? WHERE id = ? ";
-            $q = $this->DB->prepare($sql);
-            $q->execute(array($data['cedula'],$data['nombre'],$data['apellidos'],$data['promedio'],$data['edad'],$data['fecha'], $data['carrera'], $date));
+            $sql = "UPDATE carrera  set nombre=?, codigo=?, descripcion=?, id_universidad=? WHERE id = ? ";
+            $query = $this->DB->prepare($sql);
+            $query->execute(array($data['nombre'],$data['codigo'],$data['descripcion'],$data['universidad']));
             Database::disconnect();
 
         }
@@ -60,9 +59,9 @@
         //Función de eliminar el registro
         function delete($date){
             $this->DB->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            $sql="DELETE FROM estudiante where id=?";
+            $sql="DELETE FROM carrera where id=?";
             $q=$this->DB->prepare($sql);
-            $q->execute(array($date));
+                $q->execute(array($date));
             Database::disconnect();
         }
     }

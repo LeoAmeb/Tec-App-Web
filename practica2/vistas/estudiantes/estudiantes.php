@@ -2,6 +2,8 @@
     <div class="jumbotron">
         <h2>formulario registro</h2>
 
+        <!-- Formulario de edición e inserción -->
+
     </div>
     <div class="col-md-6 col-md-offset-3">
         <div class="form-horizontal" style="">
@@ -11,14 +13,6 @@
             <?php if($data['id']!=""){ ?>
             <form action="index.php?m=get_datosE&id=<?php echo $data['id'];?>" method="post">
             <?php } ?>
-
-                <div class="form-group">
-                    <label class=" col-sm-2 control-label" for="txt_id">ID:</label>
-                    <div class="col-sm-10">
-                <input type="text" class="form-control" name="txt_id" value="<?php echo $data['id']; ?>">
-                    </div>
-                    
-                </div>
                 <div class="form-group">
                     <label class=" col-sm-2 control-label" for="txt_cedula">CEDULA:</label>
                     <div class="col-sm-10">
@@ -57,7 +51,21 @@
                 <div class="form-group">
                     <label class=" col-sm-2 control-label" for="txt_fecha">fecha:</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" name="txt_fecha" value="<?php echo $data['fecha']; ?>">
+                        <input type="date" class="form-control" name="txt_fecha" value="<?php echo $data['fecha']; ?>">
+                    </div>
+                    
+                </div>
+                <div class="form-group">
+                    <label class=" col-sm-2 control-label" for="select_carrera">Carrera:</label>
+                    <div class="col-sm-10">
+                        <!-- SELECT DE CARRERAS -->
+                        <select name="select_carrera" class="form-control">
+                            <?php 
+                                foreach ($carrera as $key) {
+                                    echo '<option value="'.$key["id"].'">'.$key["nombre"].'</option>';
+                                }
+                             ?>
+                        </select>
                     </div>
                     
                 </div>
