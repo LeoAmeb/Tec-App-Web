@@ -239,6 +239,20 @@ include_once "models/crudProd.php";
             <?php
         }
 
+        public function actualizarUserController(){
+        	if (isset($_POST['nusuariotxtEditar'])) {
+				# Encriptar contra
+				$_POST["ucontratxt"] = password_hash($_POST["ucontratxt"], PASSWORD_DEFAULT);
+				$datosController = array("nusuariotxt"=>$_POST["nusuariotxt"],"ausuariotxt"=>$_POST["ausuariotxt"],"usuario"=>$_POST["usuariotxt"],"contra"=>$_POST["ucontratxt"],"email"=>$_POST["uemailtxt"]);
+				$respuesta = Datos::insertarUserModel($datosController,"users");
+				if ($respuesta == "success") {
+					echo 'Bien'
+				}else{
+					echo "Mal";
+				}
+			}
+        }
+
 //============================================================================================================
 		//vista de categorias
 		public static function vistaCategoriasController(){
