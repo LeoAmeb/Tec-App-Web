@@ -487,5 +487,94 @@
                     ';
 				}
 			}
+			public function delProductController(){
+			$datosController = $_GET['idProductDel'];
+			$respuesta = Datos::editarProductModel($datosController,"products");
+			?>
+			<div class="col-md-6 mt-3">
+				<div class="card card-warning">
+					<div class="card-header">
+						<h4><b>Eliminar</b> stock al producto</h4>
+					</div>
+					<div class="card-body">
+						<form action="index.php?Action=inventario" method="post">
+							<div class="form-group">
+								<input type="hidden" name="idProductAdd" id="idProductAdd" value="<?php echo $respuesta['id'];?>" required>
+							</div>
+
+							<div class="form-group">
+								<label for="codigotxteditar">Stock: </label>
+								<input type="number" name="delstocktxt" id="delstocktxt" class="form-group" required placeholder="Stock del producto" min="1" max="<?php echo $respuesta["stock"]; ?>" value="<?php echo $respuesta["stock"]; ?>" requierd placeholder="Stock de producto">
+							</div>
+
+							<div class="form-group">
+								<label for="referenciatxtdel">Motivo: </label>
+								<input type="text" name="referenciatxtdel" id="referenciatxtdel" class="form-group" required placeholder="Referencia del producto">
+							</div>
+							<button class="btn btn-primary" type="submit">Realizar Cambio</button>
+						</form>
+					</div>
+				</div>
+			</div>
+			<?php
+		}
+
+		public function vistaHistorialController(){
+			$respuesta = Datos::vistaHistoriaModel("historial");
+			foreach ($respuesta as $row => $item) {
+				echo '<tr>
+						<td>'.$item["usuario"].'</td>
+						<td>'.$item["producto"].'</td>
+						<td>'.$item["nota"].'</td>
+						<td>'.$item["cantidad"].'</td>
+						<td>'.$item["referencia"].'</td>
+						<td>'.$item["fecha"].'</td>
+					</tr>
+					';
+			}
+		}
+
+		public function vistaCategoriesController(){
+		$respuesta = Datos::vistaHistoriaModel("historial");
+			foreach ($respuesta as $row => $item) {
+				echo '<tr>
+						<td>
+						<a href="index.php?action=categorias&idCategoryEditar='.$item[idc].'" class="btn btn-warning btn-sm btn-icon" title="Editar" data-toggle="tooltip"><i class="fa fa-edit"></i></a>
+						</td>
+						<td>
+						<a href="index.php?action=categorias&idCategoryEditar='.$item[idc].'" class="btn btn-warning btn-sm btn-icon" title="Editar" data-toggle="tooltip"><i class="fa fa-trash"></i></a>
+						</td>
+						<td>'.$item["idc"].'</td>
+						<td>'.$item["ncategoria"].'</td>
+						<td>'.$item["dcategoria"].'</td>
+						<td>'.$item["fcategoria"].'</td>
+					</tr>';
+			}
+		}
+		public function registrarCategoryController(){
+		?>
+			<div class="col-md-6 mt-3">
+				<div class="card card-warning">
+					<div class="card-header">
+						<h4><b>Registro</b> de Categorías</h4>
+					</div>
+					<div class="card-body">
+						<form action="index.php?Action=inventario" method="post">
+							<div class="form-group">
+								<label for="ncategoriatxt">Nombre de la categoría:</label>
+								<input type="text" name="ncategoriatxt" id="ncategoriatxt" placeholder="Ingrese el nombre de la categoría">
+							</div>
+							<div class="form-group">
+								<label for="dcategoriatxt">Stock: </label>
+								<input type="number" name="dcategoriatxt" id="dcategoriatxt" class="form-group" required  placeholder="Ingrese la descripción de la categoria">
+							</div>
+							<button class="btn btn-primary" type="submit">Agregar</button>
+						</form>
+					</div>
+				</div>
+			</div>
+			<?php
+		}
     }
 ?>
+
