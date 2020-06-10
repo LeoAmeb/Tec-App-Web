@@ -1,4 +1,4 @@
-<?php 
+<?php
 	/* Se verifica que existe una sesion, en caso de que no sea así, se muestra el login */
 	if (!isset($_SESSION['validar'])) {
 		header("location:index.php?action=ingresar");
@@ -13,7 +13,7 @@
 	if (isset($_GET['registrar'])) {
 		$usuarios->registrarUserController();
 	} else if (isset($_GET['idUserEditar'])) {
-		$usuario->editarUserController();
+		$usuarios->editarUserController();
 	}
 
 ?>
@@ -46,7 +46,7 @@
 							</tr>
 						</thead>
 						<tbody>
-							<?php 
+							<?php
 								/* Se llama al controlador que muestra todas las categorias que existen*/
 								$usuarios->vistaUserController();
 							 ?>

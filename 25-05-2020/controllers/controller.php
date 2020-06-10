@@ -42,7 +42,7 @@ class MvcController{
 		if (isset($_POST["txtUser"]) && isset($_POST["txtPassword"])) {
 			$datosController = array("user"=>$_POST["txtUser"], "password"=>$_POST["txtPassword"]);
 
-			$respuesta = Datos::ingresoUsuarioModel($datosController, "users");
+			$respuesta = Datos::ingresoUserModel($datosController, "users");
 
 			//Validar la respuesta modelo para ver si el usuario es correcto
 
@@ -62,15 +62,15 @@ class MvcController{
 	}
 
 	public function vistaUserController(){
-		$respuesta = Datos::vistaUsuarioModel("users");
+		$respuesta = Datos::vistaUserModel("users");
 		foreach ($respuesta as $row => $item) {
 			echo '
 				<tr>
 					<td>
-						<a href="index.php?action=usuarios&idUserEditar='.$item["user_id"].'" class="btn btn-warning btn-sm btn-icon" title="Editar" data-toggle="tooltip"><i class="fa fa-edit"></i></a>
+						<a href="index.php?action=usuarios&idUserEditar='.$item["id"].'" class="btn btn-warning btn-sm btn-icon" title="Editar" data-toggle="tooltip"><i class="fa fa-edit"></i></a>
 					</td>
 					<td>
-						<a href="index.php?action=usuarios&idBorrar='.$item["user_id"].'" class="btn btn-warning btn-sm btn-icon" title="Elimianr" data-toggle="tooltip"><i class="fa fa-trash"></i></a>
+						<a href="index.php?action=usuarios&idBorrar='.$item["id"].'" class="btn btn-warning btn-sm btn-icon" title="Elimianr" data-toggle="tooltip"><i class="fa fa-trash"></i></a>
 					</td>
 					<td>'.$item["firstname"].'</td>
 					<td>'.$item["lastname"].'</td>
@@ -86,35 +86,36 @@ class MvcController{
 		?>
 		<div class="col-md-6 mt-3">
 			<div class="card card-primary">
-				<div class="card-header">
-					<h4><b>Registro</b> de Usuarios</h4>
+				<div class="card card-primary">
+					<div class="card-header">
+						<h4><b>Registro</b> de usuarios</h4>
+					</div>
+					<div class="card-body">
+						<form method="POST" action="index.php?action=usuarios">
+							<div class="form-group">
+								<label for="nusuariotxt">Nombre: </label>
+								<input class="form-control" type="text" name="nusuariotxt" id="nusuariotxt" placeholder="Ingrese el nombre" required>
+							</div>
+							<div class="form-group">
+								<label for="ausuariotxt">Apellido: </label>
+								<input class="form-control" type="text" name="ausuariotxt" id="ausuariotxt" placeholder="Ingrese el apellido" required>
+							</div>
+							<div class="form-group">
+								<label for="usuariostxt">Usuario: </label>
+								<input class="form-control" type="text" name="usuariotxt" id="usuariotxt" placeholder="Ingrese el usuario" required>
+							</div>
+							<div class="form-group">
+								<label for="ucontratxt">Contraseña: </label>
+								<input class="form-control" type="password" name="ucontratxt" id="ucontratxt" placeholder="Ingrese la contraseña" required>
+							</div>
+							<div class="form-group">
+								<label for="uemailtxt">Correo electrónico: </label>
+								<input class="form-control" type="email" name="uemailtxt" id="uemailtxt" placeholder="Ingrese el correo" required>
+							</div>
+							<button class="btn btn-primary" type="submit">Enviar</button>
+						</form>
+					</div>
 				</div>
-			</div>
-			<div class="clad-body">
-				<form method="post" action="index.php?action=usuarios">
-					<div class="form-group">
-						<label for="nusuariotxt">Nombre</label>
-						<input class="form-control" type="text" name="nusuariotxt" id="nusuariotxt" placeholder="Ingrese el nombre" required>
-					</div>
-					<div class="form-group">
-						<label for="ausuariotxt">Apellido</label>
-						<input class="form-control" type="text" name="ausuariotxt" id="ausuariotxt" placeholder="Ingrese el apellido" required>
-					</div>
-					<div class="form-group">
-						<label for="usuariotxt">Usuario</label>
-						<input class="form-control" type="text" name="usuariotxt" id="usuariotxt" placeholder="Ingrese el usuario" required>
-					</div>
-					<div class="form-group">
-						<label for="ncontratxt">Contraseña</label>
-						<input class="form-control" type="password" name="ncontratxt" id="ncontratxt" placeholder="Ingrese la contraseña" required>
-					</div>
-					<div class="form-group">
-						<label for="ncorreotxt">Correo electrónico</label>
-						<input class="form-control" type="email" name="ncorreotxt" id="ncorreotxt" placeholder="Ingrese el correo" required>
-					</div>
-					<button class="btn btn-primary" type="submit">Agregar</button>
-				</form>
-
 			</div>
 		</div>
 		<?php
@@ -122,12 +123,14 @@ class MvcController{
 
 	public function insertarUserController(){
 		if (isset($_POST["nusuariotxt"])) {
+			//Encriptar la contraseña
+			$_POST["ucontratxt"] = password_hash($_POST["ucontratxt"], PASSWORD_DEFAULT);
 
-			$_POST["ncontratxt"] = password_hash($_POST["ncontratxt"], PASSWORD_DEFAULT);
+			//Almacenar en un array los valores de los text del método "registrarUserController"
+			$datosController = array("nusuario"=>$_POST["nusuariotxt"], "ausuario"=>$_POST["ausuariotxt"], "usuario"=>$_POST["usuariotxt"], "contra"=>$_POST["ucontratxt"],"email"=>$_POST["uemailtxt"]);
 
-			$datosController = array("nusuario" => $_POST["nusuariotxt"], "ausuario" => $_POST["ausuariotxt"], "usuario" => $_POST["usuariotxt"], "contra" => $_POST["ncontratxt"], "email" => $_POST["ncorreotxt"]);
-
-			$respuesta = Datos::insertarUsuarioModel($datosController, "users");
+			//Se envía los datos al modelo
+			$respuesta = Datos::insertarUserModel($datosController, "users");
 
 			if ($respuesta == "success") {
 				echo '
@@ -140,7 +143,8 @@ class MvcController{
 						</h5>
 						Usuario agregado con exito.
 					</div>
-				</div>';
+				</div>
+				';
 			} else {
 				echo '
 				<div class="col-md-6 mt-3">
@@ -161,7 +165,7 @@ class MvcController{
 	public function editarUserController() {
 		$datosController = $_GET["idUserEditar"];
 		//envío de datos al mododelo
-		$respuesta = Datos::editarUsuarioModel($datosController,"users");
+		$respuesta = Datos::editarUserModel($datosController,"users");
 		?>
 		<div class="col-md-6 mt-3">
 			<div class="card card-warning">
@@ -207,7 +211,7 @@ class MvcController{
 
 			$datosController = array("id" => $_POST["idUserEditar"], "nusuario" => $_POST["nusuariotxtEditar"], "ausuario" => $_POST["ausuariotxtEditar"], "usuario" =>$_POST["usuariotxtEditar"], "contra" => $_POST["contratxtEditar"], "email" => $_POST["uemailtxtEditar"]);
 
-			$respuesta = Datos::actualizarUsuarioModel();
+			$respuesta = Datos::actualizarUserModel($datosController,"user");
 
 			if ($respuesta == "success") {
 				echo '
@@ -244,7 +248,7 @@ class MvcController{
 		if (isset($_GET["idBorrar"])) {
 			$datosController = $_GET["idBorrar"];
 
-			$respuesta = Datos::eliminarUsuarioModel($datosController, "users");
+			$respuesta = Datos::eliminarUserModel($datosController, "users");
 
 			if ($respuesta == "success") {
 				echo '
@@ -301,10 +305,10 @@ class MvcController{
 			echo '
 				<tr>
 					<td>
-						<a href="index.php?action=inventario&idProductEditar='.$item["id"].'" class="btn btn-warning btn-sm btn-icon" title="Editar" data-toggle="tooltip"><i class="fa fa-edit"></i></a>
+						<a href="index.php?action=productos&idProductEditar='.$item["id"].'" class="btn btn-warning btn-sm btn-icon" title="Editar" data-toggle="tooltip"><i class="fa fa-edit"></i></a>
 					</td>
 					<td>
-						<a href="index.php?action=usuarios&idBorrar='.$item["id"].'" class="btn btn-warning btn-sm btn-icon" title="Elimianr" data-toggle="tooltip"><i class="fa fa-trash"></i></a>
+						<a href="index.php?action=productos&idBorrar='.$item["id"].'" class="btn btn-warning btn-sm btn-icon" title="Elimianr" data-toggle="tooltip"><i class="fa fa-trash"></i></a>
 					</td>
 					<td>'.$item["id"].'</td>
 					<td>'.$item["codigo"].'</td>
@@ -328,7 +332,7 @@ class MvcController{
 					<h4><b>Registro</b> de productos</h4>
 				</div>
 				<div class="card-body">
-					<form method="POST" action="index.php?action=inventario">
+					<form method="POST" action="index.php?action=productos">
 						<div class="form-group">
 							<label for="codigotxt">Código: </label>
 							<input class="form-control" name="codigotxt" id="codigotxt" placeholder="Código del producto" type="text" required>
@@ -349,7 +353,7 @@ class MvcController{
 							<label for="codigotxt">Categoría: </label>
 							<select name="categoria" id="categoria" class="form-control">
 								<?php
-									$respuesta_categoria = Datos::obtenerCategoryModel("Categories");
+									$respuesta_categoria = Datos::obtenerCategoryModel("categories");
 									foreach ($respuesta_categoria as $row => $item) {
 								?>
 										<option value="<?php echo $item["id"]; ?>"> <?php echo $item["categoria"]; ?></option>
@@ -369,7 +373,7 @@ class MvcController{
 	public function insertarProductController() {
 		if (isset($_POST["codigotxt"])) {
 			$datosController = array("codigo" => $_POST["codigotxt"], "precio" => $_POST["preciotxt"], "stock" => $_POST["stocktxt"], "categoria" => $_POST["categoria"], "nombre" => $_POST["nombretxt"]);
-			$respuesta = Datos::insertarProductsController($datosController, "products");
+			$respuesta = Datos::insertarProductsModel($datosController, "products");
 
 			if ($respuesta == "success") {
 				$respuesta3 = Datos::ultimoProductsModel("products");
@@ -403,7 +407,7 @@ class MvcController{
 	}
 
 	public function editarProductoController() {
-		$datosController = $_GET["codigotxt"];
+		$datosController = $_GET["idProductEditar"];
 		$respuesta = Datos::editarProductsModel($datosController, "products");
 		?>
 		<div class="col-md-6 mt-3">
@@ -652,7 +656,7 @@ class MvcController{
 	}
 
 	public function vistaCategoriasController(){
-			$respuesta= Datos::vistaHistorialModel("categories");
+			$respuesta= Datos::vistaCategoriesModel("categories");
 
 			foreach ($respuesta as $row => $item) {
 			echo '
