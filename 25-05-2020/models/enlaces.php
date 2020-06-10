@@ -1,11 +1,8 @@
-<?php
+<?php 
 
-	class EnlacesPaginas {
+	class Paginas {
 		public function enlacesPaginasModel($enlacesModel){
-			if ($enlacesModel == "ingresar" || $enlacesModel == "usuarios" ||
-			$enlacesModel == "inventario" || $enlacesModel == "categorias" ||
-			$enlacesModel == "tablero" || $enlacesModel == "ventas" ||
-			$enlacesModel == "salir") {
+			if ($enlacesModel == "ingresar" || $enlacesModel == "usuarios" || $enlacesModel == "inventario" || $enlacesModel == "categorias" || $enlacesModel == "categorias" || $enlacesModel == "tablero" || $enlacesModel == "ventas" || $enlacesModel == "salir") {
 				$module = "views/modules/".$enlacesModel.".php";
 			} else if ($enlacesModel == "index") {
 				$module = "views/modules/tablero.php";

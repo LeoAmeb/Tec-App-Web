@@ -41,15 +41,15 @@
 				</li>
 				<li class="nav-item">
 					<a href="index.php?action=usuarios" class="nav-link">
-						<i class="nav-icon fas fa-tachometer-users"></i>
+						<i class="nav-icon fas fa-tachometer-alt"></i>
 						<p>
 							Usuarios
 						</p>
 					</a>
 				</li>
 				<li class="nav-item">
-					<a href="index.php?action=inventario" class="nav-link">
-						<i class="nav-icon fas fa-tachometer-box"></i>
+					<a href="index.php?action=productos" class="nav-link">
+						<i class="nav-icon fas fa-tachometer-alt"></i>
 						<p>
 							Productos
 						</p>
@@ -57,7 +57,7 @@
 				</li>
 				<li class="nav-item">
 					<a href="index.php?action=categorias" class="nav-link">
-						<i class="nav-icon fas fa-tachometer-tag"></i>
+						<i class="nav-icon fas fa-tachometer-alt"></i>
 						<p>
 							Categorías
 						</p>
