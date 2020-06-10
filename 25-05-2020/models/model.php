@@ -20,7 +20,7 @@
 		}
 
 		public function insertarUsuarioModel($datosModel, $tabla) {
-			$stmt = Conexion::conectar()->prepare("INSERT INTO $tabla (firstname, lastname, user_name, user_password, user_email) VALUES (:nusuario, :ausuario, :usuario :contra, :email)");
+			$stmt = Conexion::conectar()->prepare("INSERT INTO $tabla (firstname, lastname, user_name, user_password, user_email) VALUES (:nusuario, :ausuario, :usuario, :contra, :email)");
 			$stmt -> bindParam(":nusuario", $datosModel["nusuario"], PDO::PARAM_STR);
 			$stmt -> bindParam(":ausuario", $datosModel["ausuario"], PDO::PARAM_STR);
 			$stmt -> bindParam(":usuario", $datosModel["usuario"], PDO::PARAM_STR);

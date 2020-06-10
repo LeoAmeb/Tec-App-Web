@@ -1,10 +1,21 @@
 <?php
-	session_start();
-	if ($_SESSION["validar"]) {
-		header("location: index.php?action=ingresar");
-		exit();
-	}
+/* Se verifica que existe una sesion, en caso de que no sea así, se muestra el login */
+    if (!isset($_SESSION['validar'])) {
+        header("location:index.php?action=ingresar");
+        exit();
+    }
 
+    $usuarios = new MvcController();
+    $usuarios->insertarUserController();
+    $usuarios->actualizarUserController();
+    $usuarios->eliminarUserController();
+
+    if (isset($_GET['registrar'])) {
+        $usuarios->registrarUserController();
+    } else if (isset($_GET['idUserEditar'])) {
+        $usuarios->editarUserController();
+
+    }
 ?>
 <H1>USUARIOS</H1>
 

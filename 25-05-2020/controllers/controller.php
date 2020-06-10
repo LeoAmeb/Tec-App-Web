@@ -125,7 +125,7 @@ class MvcController{
 
 			$_POST["ncontratxt"] = password_hash($_POST["ncontratxt"], PASSWORD_DEFAULT);
 
-			$datosController = array("nusuario" => $_POST["nusuariotxt"], "ausuario" => $_POST["ausuariotxt"], "usuaio" => $_POST["usuariotxt"], "contra" => $_POST["ncontratxt"], "email" => $_POST["ncorreotxt"]);
+			$datosController = array("nusuario" => $_POST["nusuariotxt"], "ausuario" => $_POST["ausuariotxt"], "usuario" => $_POST["usuariotxt"], "contra" => $_POST["ncontratxt"], "email" => $_POST["ncorreotxt"]);
 
 			$respuesta = Datos::insertarUsuarioModel($datosController, "users");
 
@@ -140,8 +140,7 @@ class MvcController{
 						</h5>
 						Usuario agregado con exito.
 					</div>
-				</div>
-				';
+				</div>';
 			} else {
 				echo '
 				<div class="col-md-6 mt-3">
@@ -245,9 +244,9 @@ class MvcController{
 		if (isset($_GET["idBorrar"])) {
 			$datosController = $_GET["idBorrar"];
 
-			$respuesta = Datos::eliminarUserModel($datosController, "users");
+			$respuesta = Datos::eliminarUsuarioModel($datosController, "users");
 
-			if ($respuesta == "sucess") {
+			if ($respuesta == "success") {
 				echo '
 				<div class="col-md-6 mt-3">
 					<div class="alert alert-succes alert-dismissible">
