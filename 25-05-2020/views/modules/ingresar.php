@@ -32,3 +32,13 @@
 		</div>
 	</div>
 </div>
+<?php
+$ingreso = new MvcController();
+$ingreso -> ingresoUsuarioController();
+
+if (isset($_GET["action"])) {
+	if ($_GET["action"] == "fallo") {
+		echo "Fallo al ingresar";
+	}
+}
+?>

@@ -1,6 +1,5 @@
 <?php
 	/* Clase para crear los controladores que utilizará el usuario mientras navega en el sitio web */
-
 	class MvcController{
 		/* Metodo/Función que sirve para devolver la estructura base del sistema  */
 
@@ -21,10 +20,11 @@
 		// CONTROLADORES PARA USUARIOS //
 		/* Este controller apartir de la funcion password_verify compara el hash la contraseña ingresada con la que esta en la base de datos si es correcta guarda en el arreglo session los datos del uusario y manda al inventario o marcara mensaje de error */
 		public function ingresoUsuarioController(){
+			echo "funcion controller.php/ingresoUsuarioController";
 			if (isset($_POST["txtUser"]) && isset($_POST["txtPassword"])) {
 				//Guardar en el array los valores de los text de la vista (usuario y contraseña)
 				$datosController = array("user"=>$_POST["txtUser"], "password"=>$_POST["txtPassword"]);
-
+				$respuesta = Datos::ingresoUserModel($datosController,"users");
 				if ($respuesta["usuario"] == $_POST["txtUser"] && password_verify($_POST["txtPassword"], $respuesta["contrasena"])) {
 					session_start();
 					$_SESSION["validar"] = true;
@@ -36,7 +36,6 @@
 				}
 			}
 		}
-
 		public function vistaUsersController(){
 			$respuesta = Datos::vistaUsersModel("users");
 			foreach ($respuesta as $row => $item) {

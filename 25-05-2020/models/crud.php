@@ -1,13 +1,15 @@
-<?php 
-
+<?php
 	include "conexion.php";
-
 	class Datos extends Conexion {
-
-		public function ingresoUserModel($datosMode, $tabla) {
+		public function ingresoUserModel($datosModel, $tabla) {
+			echo "funcion model/crud.php/ingresoUserModel";
 			$stmt = Conexion::conectar()->prepare("SELECT CONCAT(firstname, ' ', lastname) AS 'nombre_usuario', user_name AS 'usuario', user_password AS 'contrasena', user_id AS 'id' FROM $tabla WHERE user_name = :usuario");
-			$stmt->bindParam(":usuario", $datosModel["user"], PDO::PARAM_STR);
-			$stmt -> execute();
+			$stmt->bindParam(":usuario", $datosModel["user_name"], PDO::PARAM_STR);
+			if ($stmt -> execute()){
+				return "success";
+			}else{
+				return "error";
+			}
 			return $stmt->fetch();
 			$stmt -> close();
 		}
@@ -77,11 +79,11 @@
 
 		}
 
-		public function contarFilasModel($tabla) { 
-			$stmt = Conexion::conectar()->prepare("SELECT COUNT(*) AS 'filas' FROM $tabla"); 
-			$stmt->execute(); 
-			return $stmt->fetch(); 
-			$stmt->close(); 
+		public function contarFilasModel($tabla) {
+			$stmt = Conexion::conectar()->prepare("SELECT COUNT(*) AS 'filas' FROM $tabla");
+			$stmt->execute();
+			return $stmt->fetch();
+			$stmt->close();
 		}
 
 		public function sumarGananciaModel($tabla){
@@ -177,7 +179,7 @@
 
 		public function insertarCategoryModel($datosModel, $tabla){
 			$stmt=Conexion::conectar()->prepare("INSERT INTO $tabla (name_category, description_category) VALUES (:ncategoria, :dcategoria)");
-			
+
 			$stmt->bindParam(":ncategoria",$datosModel["nombre_categoria"],PDO::PARAM_STR);
 			$stmt->bindParam(":dcategoria",$datosModel["descripcion_categoria"],PDO::PARAM_STR);
 			if($stmt->execute()){
@@ -207,7 +209,7 @@
 			}
 			$stmt->close();
 		}
-		//Este modelo sirve para eliminar a un usuario de la base de datos 
+		//Este modelo sirve para eliminar a un usuario de la base de datos
 		public function eliminarCategoryModel($datosModel, $tabla){
 			$stmt=Conexion::conectar()->prepare("DELETE FROM $tabla WHERE id_category=:id");
 			$stmt->bindParam(":id", $datosModel, PDO::PARAM_INT);
