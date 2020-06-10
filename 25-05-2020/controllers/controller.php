@@ -1,4 +1,4 @@
-<?php 
+<?php
 	/* Clase para crear los controladores que utilizará el usuario mientras navega en el sitio web */
 
 	class MvcController{
@@ -332,12 +332,12 @@
 							<div class="form-group">
 								<label>Categoría</label>
 								<select name="categoria" id="categoria" class="form-control">
-									<?php 
+									<?php
 										$respuesta_categoria = Datos::obtenerCategoryModel("categories");
 										foreach ($respuesta_categoria as $row => $item) {
 									 ?>
 									 	<option value="<?php echo $item["id"]; ?>"><?php echo $item["categoria"]; ?></option>
-									 <?php 
+									 <?php
 										}
 									  ?>
 								</select>
@@ -386,7 +386,7 @@
 		}
 
 		public function editarProductController(){
-			$datosController = $_GET["idProductEditar"]
+			$datosController = $_GET["idProductEditar"];
 			$respuesta = Datos::editarProductsModel($datosController, "products");
 			?>
 			<div class="col-md-6 mt-3">
@@ -422,12 +422,12 @@
 							<div class="form-group">
 								<label>Categoría</label>
 								<select name="categoriaEditar" id="categoriaEditar" class="form-control">
-									<?php 
+									<?php
 										$respuesta_categoria = Datos::obtenerCategoryModel("categories");
 										foreach ($respuesta_categoria as $row => $item) {
 									 ?>
 									 	<option value="<?php echo $item["id"]; ?>"><?php echo $item["categoria"]; ?></option>
-									 <?php 
+									 <?php
 										}
 									  ?>
 								</select>
@@ -636,9 +636,9 @@
 						<td>'.$item["ncategoria"].'</td>
 						<td>'.$item["dcategoria"].'</td>
 						<td>'.$item["fcategoria"].'</td>
-						
+
 					</tr>
-				';		
+				';
 			}
 
 		}
@@ -698,8 +698,8 @@
 									Se ha producido un error al momento de agregar la categoria, trate de nuevo.
 							</div>
 						</div>
-	        		';				
-				} 
+	        		';
+				}
 			}
 		}
 
@@ -764,8 +764,8 @@
 									Se ha producido un error al momento de editar la categoria, trate de nuevo.
 							</div>
 						</div>
-		    		';				
-				} 
+		    		';
+				}
 			}
 		}
 

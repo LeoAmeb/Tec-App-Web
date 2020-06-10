@@ -1,7 +1,5 @@
 <!DOCTYPE html>
 <html>
-
-
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -33,7 +31,7 @@
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
-    <?php 
+    <?php
         session_start();
         if (isset($_SESSION['validar']) && $_SESSION['validar'] == true) {
             include 'modules/navegacion.php';
@@ -45,17 +43,16 @@
             <section class="content">
                 <div class="container-fluid">
                     <div class="row mr-3 mt-2 mb-2">
-                        <?php 
+                        <?php
                             if ($_GET['action'] == 'tablero') {
                         ?>
                         <div class="col-sm-12">
                             <h1><b>Tablero</b></h1>
                         </div>
-                        <?php 
+                        <?php
                             }
                         ?>
                     <?php
-                        }
                         $mvc = new MvcController();
                         $mvc -> enlacesPaginasController();
                     ?>
@@ -65,11 +62,11 @@
         </div>
     </div>
 
-    <?php 
+    <?php
         if ($_GET['action'] != 'ingresar') {
     ?>
 
-    <?php 
+    <?php
         }
      ?>
 
