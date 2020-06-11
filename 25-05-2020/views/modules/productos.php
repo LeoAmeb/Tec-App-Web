@@ -5,15 +5,15 @@
 		exit();
 	}
 
-	$usuarios = new MvcController();
-	$usuarios->insertarUserController();
-	$usuarios->actualizarUserController();
-	$usuarios->eliminarUserController();
+	$productos = new MvcController();
+	$productos->insertarProductController();
+	$productos->actualizarProductController();
+	$productos->eliminarProductController();
 
 	if (isset($_GET['registrar'])) {
-		$usuarios->registrarUserController();
-	} else if (isset($_GET['idUserEditar'])) {
-		$usuarios->editarUserController();
+		$productos->registrarProductController();
+	} else if (isset($_GET['idProductEditar'])) {
+		$productos->editarProductoController();
 	}
 
 ?>
@@ -22,12 +22,12 @@
 	<div class="row mb-3"></div>
 	<div class="card card-secondary">
 		<div class="card-header">
-			<h3 class="card-title">Usuarios</h3>
+			<h3 class="card-title">Productos</h3>
 		</div>
 		<div class="card-body">
 			<div class="row mb-4">
 				<div class="col-sm-6">
-					<a href="index.php?action=usuarios&registrar" class="btn btn-info">Agregar nuevo usuario</a>
+					<a href="index.php?action=productos&registrar" class="btn btn-info">Agregar nuevo producto</a>
 				</div>
 			</div>
 			<div id="example2-wrapper" class="dataTables_wrapper dt-bootstrap4">
@@ -38,17 +38,17 @@
 							<tr>
 								<th>¿Editar?</th>
 								<th>Eliminar?</th>
-								<th>Nombre</th>
-								<th>Apellido</th>
-								<th>Usuario</th>
-								<th>Correo electrónico</th>
-								<th>Fecha de inserción</th>
+								<th>Codigo de producto</th>
+								<th>Nombre del producto</th>
+								<th>Fecha</th>
+								<th>Precio</th>
+								<th>Stock</th>
 							</tr>
 						</thead>
 						<tbody>
 							<?php 
 								/* Se llama al controlador que muestra todas las categorias que existen*/
-								$usuarios->vistaUserController();
+								$productos->vistaProductsController();
 							 ?>
 						</tbody>
 					</table>

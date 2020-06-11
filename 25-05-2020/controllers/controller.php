@@ -41,12 +41,8 @@ class MvcController{
 	public function ingresoUsuarioController(){
 		if (isset($_POST["txtUser"]) && isset($_POST["txtPassword"])) {
 			$datosController = array("user"=>$_POST["txtUser"], "password"=>$_POST["txtPassword"]);
-
 			$respuesta = Datos::ingresoUserModel($datosController, "users");
-
 			//Validar la respuesta modelo para ver si el usuario es correcto
-
-
 			//if ($respuesta["usuario"] == $_POST["txtUser"] && password_verify($_POST["txtPassword"], $respuesta["contrasena"])) {
 			if($respuesta["usuario"]==$_POST["txtUser"] && $respuesta["contrasena"]==$_POST["txtPassword"]){
 				session_start();
@@ -57,7 +53,6 @@ class MvcController{
 			} else {
 				header("location:index.php?action=fallo&res=fallo");
 			}
-
 		}
 	}
 
@@ -285,18 +280,46 @@ class MvcController{
     	$respuesta_users =Datos::contarFilasModel("users");
 		echo '
 	        <div class="col-lg-3 col-6">
-	            <div class="small-box bg-info">
-	                <div class="inner">
-	                    <h3>'.$respuesta_users["filas"].'</h3>
-	                    <p>Total de Usuarios</p>
-	                </div>
-	                <div class="icon">
-	                    <i class="far fa-address-card"></i>
-	                </div>
-	                <a class="small-box-footer" href="index.php?action=usuarios">Más <i class="fas fa-arrow-circle-right"></i></a>
-	            </div>
-	        </div>
-		';
+				<div class="small-box bg-info">
+					<div class="inner">
+						<h3>'.$respuesta_users["filas"].'</h3>
+						<p>Total de Usuarios</p>
+					</div>
+					<div class="icon">
+						<i class="far fa-address-card"></i>
+					</div>
+					<a class="small-box-footer" href="index.php?action=usuarios">Más <i class="fas fa-arrow-circle-right"></i></a>
+				</div>
+	        </div>';
+    	$respuesta_products =Datos::contarFilasModel("products");
+		echo '
+	        <div class="col-lg-3 col-6">
+				<div class="small-box bg-info">
+					<div class="inner">
+						<h3>'.$respuesta_products["filas"].'</h3>
+						<p>Total de Productos</p>
+					</div>
+					<div class="icon">
+						<i class="far fa-address-card"></i>
+					</div>
+					<a class="small-box-footer" href="index.php?action=productos">Más <i class="fas fa-arrow-circle-right"></i></a>
+				</div>
+	        </div>';
+    	$respuesta_category =Datos::contarFilasModel("categories");
+		echo '
+	        <div class="col-lg-3 col-6">
+				<div class="small-box bg-info">
+					<div class="inner">
+						<h3>'.$respuesta_category["filas"].'</h3>
+						<p>Total de Categorias</p>
+					</div>
+					<div class="icon">
+						<i class="far fa-address-card"></i>
+					</div>
+					<a class="small-box-footer" href="index.php?action=categorias">Más <i class="fas fa-arrow-circle-right"></i></a>
+				</div>
+	        </div>';
+
     }
 
     public function vistaProductsController(){
@@ -406,36 +429,54 @@ class MvcController{
 		}
 	}
 
-	public function editarProductoController() {
+public function editarProductoController(){
 		$datosController = $_GET["idProductEditar"];
 		$respuesta = Datos::editarProductsModel($datosController, "products");
 		?>
 		<div class="col-md-6 mt-3">
-			<div class="card-warning">
+			<div class="card card-warning">
 				<div class="card-header">
-					<h4><b>Editor</b> productos</h4>
+					<h4><b>Editor</b> de productos</h4>
 				</div>
 				<div class="card-body">
 					<form method="post" action="index.php?action=inventario">
 						<div class="form-group">
-							<input type="hidden" name="idProductEditar" class="form-control" value="<?php echo $respuesta["id"]; ?>" required>
+							<input type="hidden" name="idProductEditar" class="form-control" value="<?php echo $respuesta["id"]; ?>">
 						</div>
 						<div class="form-group">
-							<label for="referenciatxteditar">Motivo</label>
-							<input type="text" name="referenciatxteditar" class="form-control" id="referenciatxteditar" placeholder="Referencia del producto" required>
+							<label for="codigotxtEditar">Código: </label>
+							<input class="form-control" name="codigotxtEditar" id="codigotxtEditar" type="text" value="<?php echo $respuesta["codigo"]; ?>" required placeholder="Codigo de producto">
 						</div>
 						<div class="form-group">
-							<label for="categoriaeditar">Categoria</label>
-							<select>
+							<label for="nombretxtEditar">Nombre: </label>
+							<input class="form-control" name="nombretxtEditar" id="nombretxtEditar" type="text" value="<?php echo $respuesta["nombre"]; ?>" required placeholder="Nombre de producto">
+						</div>
+						<div class="form-group">
+							<label for="preciotxtEditar">Precio: </label>
+							<input class="form-control" name="preciotxtEditar" id="preciotxtEditar" type="number" min="1" value="<?php echo $respuesta["precio"]; ?>" required placeholder="Precio de producto">
+						</div>
+						<div class="form-group">
+							<label for="stocktxtEditar">Stock: </label>
+							<input class="form-control" name="stocktxtEditar" id="stocktxtEditar" type="text" value="<?php echo $respuesta["stock"]; ?>" required placeholder="Stock de producto">
+						</div>
+						<div class="form-group">
+							<label for="referenciatxtEditar">Motivo: </label>
+							<input class="form-control" name="referenciatxtEditar" id="referenciatxtEditar" type="text" required placeholder="Referencia de producto">
+						</div>
+						<div class="form-group">
+							<label>Categoría</label>
+							<select name="categoriaEditar" id="categoriaEditar" class="form-control">
 								<?php
 									$respuesta_categoria = Datos::obtenerCategoryModel("categories");
 									foreach ($respuesta_categoria as $row => $item) {
-								?>
-									<option value="<?php echo$item["id"]; ?>"> <?php echo $item["categoria"]; ?></option>
-								<?php } ?>
+								 ?>
+								 	<option value="<?php echo $item["id"]; ?>"><?php echo $item["categoria"]; ?></option>
+								 <?php
+									}
+								  ?>
 							</select>
 						</div>
-						buttton
+						<button class="btn btn-primary" type="submit">Editar</button>
 					</form>
 				</div>
 			</div>
@@ -446,11 +487,11 @@ class MvcController{
 	/*-- Esta funcion permite actualizar los datos en la tabla productos a partir del metodo form anterior mandando atravez del modelo del crud a traves del arreglo y con la variable respuesta mandamos dichos datos porque se llama al modelo actualizarproductsmodel si en el modelo se realizo correctamente entonces mandara una alerta decorrecto y pasara allenar dichos datos en elmodelo de insertar historial model en caso contrario no se hara nada y mostrara mensaje de error --*/
 
 	public function actualizarProductController() {
-		if (isset($_POST["codigotxteditar"])) {
-			$datosController = array("id"=>$_POST["idProductEditar"], "codigo"=>$_POST["codigotxteditar"], "precio"=>$_POST["preciotxteditar"], "stock"=>$_POST["stocktxteditar"], "categoria"=>$_POST["categoriaeditar"], "nombre"=>$_POST["nombretxteditar"]);
-			$respuesta = Datos::actualizarProductsController($datosController, "products");
+		if (isset($_POST["codigotxtEditar"])) {
+			$datosController = array("id"=>$_POST["idProductEditar"], "codigo"=>$_POST["codigotxtEditar"], "precio"=>$_POST["preciotxtEditar"], "stock"=>$_POST["stocktxtEditar"], "categoria"=>$_POST["categoriaEditar"], "nombre"=>$_POST["nombretxtEditar"]);
+			$respuesta = Datos::actualizarProductsModel($datosController, "products");
 			if ($respuesta == "success") {
-				$datosController2 = array("user" => $_SESSION["id"], "cantidad" => $_POST["stocktxteditar"], "producto" => $_POST["idProductEditar"], "note"=>$_SESSION["nombre_usuario"]."agrego/compro", "reference" => $_POST["referenciatxteditar"]);
+				$datosController2 = array("user" => $_SESSION["id"], "cantidad" => $_POST["stocktxtEditar"], "producto" => $_POST["idProductEditar"], "note"=>$_SESSION["nombre_usuario"]."agrego/compro", "reference" => $_POST["referenciatxtEditar"]);
 				$respuesta2 = Datos::insertarHistorialModel($datosController2, "historial");
 				echo '
 					<div class="col-md-6 mt-3">
@@ -513,6 +554,7 @@ class MvcController{
    			}
     	}
 	}
+
 
 	public function addProductController(){
 		$datosController=$_GET["idProductAdd"];
@@ -726,7 +768,7 @@ class MvcController{
 			if ($respuesta == "success") {
 				echo '
 					<div class="col-md-6 mt-3">
-						<div class="alert alert-danger alert-dismissible">
+						<div class="alert alert-success alert-dismissible">
 							<button class="close" type="button" data-dismiss="alert" aria-hidden="true">x</button>
 							<h5>
 								<i class="icon fas fa-ban"></i>
@@ -753,7 +795,7 @@ class MvcController{
 
 	/* Este controlador funciona para mostrar un formulario al usuario cargando los datos del producto que desea editar mediante el uso de un modelp */
 	public function editarCategoryController(){
-		$datosController = $_GET["idCategoryModel"];
+		$datosController = $_GET["idCategoryEditar"];
 		$respuesta = Datos::editarCategoryModel($datosController, "categories");
 		?>
 		<div class="col-md-6 mt-3">
@@ -762,7 +804,7 @@ class MvcController{
 					<h4><b>Editor</b> de categorias</h4>
 				</div>
 				<div class="card-body">
-					<form method="POST">
+					<form method="POST" action="index.php?action=categorias">
 						<div class="form-group">
 							<input type="hidden" name="idCategoryEditar" class="form-control" value="<?php echo $respuesta["id"] ?>">
 						</div>
@@ -772,7 +814,7 @@ class MvcController{
 						</div>
 						<div class="form-group">
 							<label for="dcategoriatxt">Descripcion de categoria</label>
-							<input class="form-control" type="text" name="dcategoriatxtEditar" id="dcategoriatxt" placeholder="Ingrese la descripcion de la categoria" value="<?php echo $respuesta["ndescipcion_categoria"] ?>">
+							<input class="form-control" type="text" name="dcategoriatxtEditar" id="dcategoriatxt" placeholder="Ingrese la descripcion de la categoria" value="<?php echo $respuesta["descripcion_categoria"] ?>">
 						</div>
 						<button class="btn btn-primary" type="submit">Editar</button>
 					</form>
@@ -814,37 +856,37 @@ class MvcController{
 		}
 	}
 
-	public function eliminarCategoryController(){
-		if (isset($_GET["idBorrar"])) {
-			$datosController = $_GET["idBorrar"];
-			$respuesta = Datos::eliminarCategoryModel($datosController, "categories");
-			if ($respuesta == "success") {
-				echo '
-					<div class="col-md-6 mt-3">
-						<div class="alert alert-danger alert-dismissible">
-							<button class="close" type="button" data-dismiss="alert" aria-hidden="true">x</button>
-							<h5>
-								<i class="icon fas fa-ban"></i>
-									¡Éxito!
-							</h5>
-							Categoria eliminada con éxito
-						</div>
-					</div> ';
-			} else {
-				echo '
-					<div class="col-md-6 mt-3">
-						<div class="alert alert-danger alert-dismissible">
-							<button class="close" type="button" data-dismiss="alert" aria-hidden="true">x</button>
-							<h5>
-								<i class="icon fas fa-ban"></i>
-									¡Error!
-							</h5>
-							Error al eliminar la categoria
-						</div>
-					</div> ';
-			}
-		}
-	}
+public function eliminarCategoryController(){
+        if (isset($_GET["idBorrar"])) {
+            $datosController = $_GET["idBorrar"];
+            $respuesta = Datos::eliminarCategoryModel($datosController, "categories");
+            if ($respuesta == "success") {
+                echo '
+                    <div class="col-md-6 mt-3">
+                        <div class="alert alert-success alert-dismissible">
+                            <button class="close" type="button" data-dismiss="alert" aria-hidden="true">x</button>
+                            <h5>
+                                <i class="icon fas fa-ban"></i>
+                                    ¡Éxito!
+                            </h5>
+                            Categoria eliminada con éxito
+                        </div>
+                    </div> ';
+            } else {
+                echo '
+                    <div class="col-md-6 mt-3">
+                        <div class="alert alert-danger alert-dismissible">
+                            <button class="close" type="button" data-dismiss="alert" aria-hidden="true">x</button>
+                            <h5>
+                                <i class="icon fas fa-ban"></i>
+                                    ¡Error!
+                            </h5>
+                            Error al eliminar la categoria
+                        </div>
+                    </div> ';
+            }
+        }
+    }
 }
 
 ?>

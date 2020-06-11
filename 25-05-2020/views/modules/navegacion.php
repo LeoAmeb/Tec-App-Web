@@ -1,4 +1,4 @@
-<?php 
+<?php
 	/* Verifica que existe una sesión iniciada */
 	if ($_GET['action'] == 'salir') {
 		header('location:index.php?action=ingresar');
@@ -10,12 +10,12 @@
 		<li class="nav-item">
 			<a class="nav-link" data-widget="pushmenu" href="index.php?action=tablero"><i class="fas fa-bars"></i></a>
 		</li>
-	</ul>	
+	</ul>
 </nav>
 
 <aside class="main-sidebar sidebar-dark-success elevation-4">
 	<a href="index.php?action=tablero" class="brand-link nav-success">
-		<img src="views/assets/dist/img/UPV.png" alt="Inventarios | TAW | UPV" class="brand-image img-square" style="opacity: .8">
+		<img src="views/assets/dist/img/AdminLTELogo.png" alt="Inventarios | TAW | UPV" class="brand-image img-square" style="opacity: .8">
 		<span class="brand-text font-weight-light">Inventarios 2020</span>
 	</a>
 

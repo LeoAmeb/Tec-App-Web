@@ -4,7 +4,7 @@
 
 	class Datos extends Conexion {
 
-		public function ingresoUserModel($datosMode, $tabla) {
+		public function ingresoUserModel($datosModel, $tabla) {
 			$stmt = Conexion::conectar()->prepare("SELECT CONCAT(firstname, ' ', lastname) AS 'nombre_usuario', user_name AS 'usuario', user_password AS 'contrasena', user_id AS 'id' FROM $tabla WHERE user_name = :usuario");
 			$stmt->bindParam(":usuario", $datosModel["user"], PDO::PARAM_STR);
 			$stmt -> execute();
@@ -189,7 +189,7 @@
 		}
 		public function editarCategoryModel($datosModel, $tabla){
 			$stmt=Conexion::conectar()->prepare("SELECT id_category AS 'id', name_category AS 'nombre_categoria', description_category AS 'descripcion_categoria' FROM $tabla WHERE id_category=:id");
-			$stmt->bindParam(":id", datosModel, PDO::PARAM_INT);
+			$stmt->bindParam(":id", $datosModel, PDO::PARAM_INT);
 			$stmt->execute();
 			return $stmt->fetch();
 			$stmt->close();
@@ -209,15 +209,15 @@
 		}
 		//Este modelo sirve para eliminar a un usuario de la base de datos
 		public function eliminarCategoryModel($datosModel, $tabla){
-			$stmt=Conexion::conectar()->prepare("DELETE FROM $tabla WHERE id_category=:id");
-			$stmt->bindParam(":id", $datosModel, PDO::PARAM_INT);
-			if($stmt->execute()){
-				return "success";
-			}else{
-				return "error";
-			}
-			$stmt->close();
-		}
+            $stmt=Conexion::conectar()->prepare("DELETE FROM $tabla WHERE id_category=:id");
+            $stmt->bindParam(":id", $datosModel, PDO::PARAM_INT);
+            if($stmt->execute()){
+                return "success";
+            }else{
+                return "error";
+            }
+            $stmt->close();
+        }
 		//MODELO PARA LOS SELECTS
 		//Este modelo permite crear un select y mostrarlo a partir de un select en php dando las categorias y nombres en el formulario producto
 		public function obtenerCategoryModel($tabla){
