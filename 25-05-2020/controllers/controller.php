@@ -429,7 +429,7 @@ class MvcController{
 		}
 	}
 
-public function editarProductoController(){
+	public function editarProductoController(){
 		$datosController = $_GET["idProductEditar"];
 		$respuesta = Datos::editarProductsModel($datosController, "products");
 		?>
@@ -856,7 +856,7 @@ public function editarProductoController(){
 		}
 	}
 
-public function eliminarCategoryController(){
+	public function eliminarCategoryController(){
         if (isset($_GET["idBorrar"])) {
             $datosController = $_GET["idBorrar"];
             $respuesta = Datos::eliminarCategoryModel($datosController, "categories");
