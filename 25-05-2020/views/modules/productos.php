@@ -1,4 +1,4 @@
-<?php 
+<?php
 	/* Se verifica que existe una sesion, en caso de que no sea así, se muestra el login */
 	if (!isset($_SESSION['validar'])) {
 		header("location:index.php?action=ingresar");
@@ -38,15 +38,17 @@
 							<tr>
 								<th>¿Editar?</th>
 								<th>Eliminar?</th>
+								<th>id</th>
 								<th>Codigo de producto</th>
 								<th>Nombre del producto</th>
 								<th>Fecha</th>
 								<th>Precio</th>
 								<th>Stock</th>
+								<th>Categoría</th>
 							</tr>
 						</thead>
 						<tbody>
-							<?php 
+							<?php
 								/* Se llama al controlador que muestra todas las categorias que existen*/
 								$productos->vistaProductsController();
 							 ?>

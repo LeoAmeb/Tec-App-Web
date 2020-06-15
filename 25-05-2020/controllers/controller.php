@@ -319,9 +319,7 @@ class MvcController{
 					<a class="small-box-footer" href="index.php?action=categorias">Más <i class="fas fa-arrow-circle-right"></i></a>
 				</div>
 	        </div>';
-
     }
-
     public function vistaProductsController(){
 		$respuesta = Datos::vistaProductsModel("products");
 		foreach ($respuesta as $row => $item) {
@@ -340,8 +338,6 @@ class MvcController{
 					<td>'.$item["precio"].'</td>
 					<td>'.$item["stock"].'</td>
 					<td>'.$item["categoria"].'</td>
-					<td><a href="index.php?action=inventario&idProductAdd='.$item["id"].'" class="btn btn-warning btn_sm btn-icon" title="Agregar Stock" data-toggle="tooltip"><i class="fa fa-edit"></i></a></td>
-					<td><a href="index.php?action=inventario&idProductDel='.$item["id"].'" class="btn btn-warning btn_sm btn-icon" title="Quitar de Stock" data-toggle="tooltip"><i class="fa fa-edit"></i></a></td>
 				</tr>
 			';
 		}
@@ -400,14 +396,14 @@ class MvcController{
 
 			if ($respuesta == "success") {
 				$respuesta3 = Datos::ultimoProductsModel("products");
-				$datosController2 = array("user" => $_SESSION["id"], "cantidad" => $_POST["stocktxt"], "producto"=>$respuesta3["id"], "note"=>$_SESSION["nombre_usuario"]."agrego/compro", "reference"=>$_POST["referenciatxt"]);
+				$datosController2 = array("user" => $_SESSION["id"], "cantidad" => $_POST["stocktxt"], "producto"=>$respuesta3["id"], "note"=>$_SESSION["nombre_usuario"]."agrego/compro");
 				$respuesta2 = Datos::insertarHistorialModel($datosController2, "historial");
 				echo '
 					<div class="col-md-6 mt-3">
-						<div class="alert alert-danger alert-dismissible">
+						<div class="alert alert-success alert-dismissible">
 							<button class="close" type="button" data-dismiss="alert" aria-hidden="true">x</button>
 							<h5>
-								<i class="icon fas fa-ban"></i>
+								<i class="icon fas fa-check"></i>
 									¡Éxito!
 							</h5>
 							Producto agregado con éxito
@@ -887,6 +883,10 @@ class MvcController{
             }
         }
     }
+    	public function verProductos(){
+    		$respuesta = Datos::obtenerProductos("products");
+    		return $respuesta;
+    	}
 }
 
 ?>

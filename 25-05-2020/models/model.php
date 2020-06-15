@@ -264,6 +264,12 @@
 			}
 			$stmt->close();
 		}
+		public function obtenerProductos($tabla){
+			$stmt=Conexion::conectar()->prepare("SELECT id_product, code_producto, name_product, price_product, stock, id_category FROM $tabla");
+			$stmt->execute();
+			return $stmt->fetchAll();
+			$stmt->close();
+		}
 
 	}
 

@@ -4,11 +4,180 @@
 		header("location:index.php?action=ingresar");
 		exit();
 	}
+	$inventario = new MvcController;
+	$datos = $inventario->verProductos();
 ?>
+
 <div class="container-fluid">
+	    <div class="modal fade" id="modal-cliente">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Datos del <b>Cliente</b></h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true"></span>
+                    </button>
+                </div><!-- /.modal-header -->
+                <form method="post" action="index.php?action=detalle_venta">
+                    <div class="modal-body"  style="height: 400px; overflow: scroll;">
+
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label for="ncliente">Nombre del Cliente:</label>
+                                    <input type="text" class="form-control form-control-sm" placeholder="Nombre(s)" name="ncliente" id="ncliente" required>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label for="correo">Correo:</label>
+                                    <input type="mail" class="form-control form-control-sm" placeholder="Correo" name="correo" id="correo"  required>
+                                </div>
+                            </div>
+                        </div>
+                        <hr/>
+
+                        <div class="form-group">
+                            <label for="direccion">Dirección</label>
+                            <input type="text" class="form-control form-control-sm" placeholder="Dirección" name="direccion" id="direccion" required>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label for="ccelular">Celular:</label>
+                                    <input type="text" class="form-control form-control-sm" placeholder="Celular" name="ccelular" id="ccelular" required>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label for="cfecha">Fecha de Nacimiento:</label>
+                                    <input type="date" class="form-control form-control-sm" placeholder="Fecha de Nacimiento" name="cfecha" id="cfecha" required>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div><!-- /.modal-body -->
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                        <button type="submit" class="btn btn-primary">Agregar</button>
+                    </div><!-- /.modal-footer -->
+                </form>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal -->
+    <div class="modal fade" id="modal-cancelar">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Cancelar <b>Venta</b></h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true"></span>
+                    </button>
+                </div><!-- /.modal-header -->
+                <form method="post" action="index.php?action=detalle_venta">
+                    <div class="modal-body">
+
+                            <p>Verifique su cuenta.</p>
+
+                            <div class="form-group">
+                                <label for="usertxt">Usuario:</label>
+                                <input type="text" class="form-control form-control-sm" placeholder="Ingrese su usuario" name="usertxt" id="usertxt" required>
+                            </div>
+
+
+                            <div class="form-group">
+                                <label for="acliente">Contraseña:</label>
+                                <input type="passwordtxt" class="form-control form-control-sm" placeholder="Ingrese su contraseña" name="passwordtxt" id="passwordtxt"  required>
+                            </div>
+
+                    </div><!-- /.modal-body -->
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                        <button type="submit" class="btn btn-primary">Agregar</button>
+                    </div><!-- /.modal-footer -->
+                </form>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal -->
+
+    <!-- Modal para aplicar un descuento -->
+    <div class="modal fade" id="modal-descuento">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Aplicar <b>Descuento</b></h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true"></span>
+                    </button>
+                </div><!-- /.modal-header -->
+                <form method="post" action="index.php?action=detalle_venta">
+                    <div class="modal-body">
+
+                            <p>Ingresa el descuento que desea aplicar.</p>
+
+                            <div class="form-group">
+                                <label for="desctxt">Descuento:</label>
+                                <input type="decimal" step="any" class="form-control form-control-sm" placeholder="0.00" min="0" max="1" name="desctxt" id="desctxt" required>
+                            </div>
+
+                    </div><!-- /.modal-body -->
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                        <button type="submit" class="btn btn-primary">Aceptar</button>
+                    </div><!-- /.modal-footer -->
+                </form>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal -->
+  <!-- Modal para realizar un pago -->
+  <div class="modal fade" id="modal-pago">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Aplicar <b>Pago</b></h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true"></span>
+                    </button>
+                </div><!-- /.modal-header -->
+                <form method="post" action="index.php?action=detalle_venta">
+                    <div class="modal-body">
+
+                            <p>Ingresa el descuento que desea aplicar.</p>
+
+                            <div class="form-group">
+                                <label for="pagotxt">Descuento:</label>
+                                <input type="decimal" step="any" class="form-control form-control-sm" placeholder="0.00" min="0" max="1" name="pagoctxt" id="pagotxt" required>
+                            </div>
+
+                    </div><!-- /.modal-body -->
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                        <button type="submit" class="btn btn-primary">Realizar Pago</button>
+                    </div><!-- /.modal-footer -->
+                </form>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal -->
 	<section class="content">
 		<div class="row">
-			<!--BOTONES DE ARRIBA-->
+			<!--BOTONES AGREGAR-->
 			<div class="col-lg-7 col-xs-12">
 				<div class="card card-primary">
 					<div class="card-header"></div>
@@ -19,14 +188,16 @@
 									<span class="input-group-btn"></span>
 									<select data-live-search="true" name="customer_id" title="Please choose a customer" class="form-control customers-list dropdown-bootstrap">
 										<option value="">Elige un cliente. </option>
+										<option value="">PLEM </option>
+										<option value="">ARTUGA </option>
 									</select>
 									<span class="input-group-btn">
-											<button type="button" class="btn btn-default" ng-click="openCreatingUser()" title="Add a customer">
+											<button type="button" data-toggle="modal" data-target="#modal-cliente" class="btn btn-default" ng-click="openCreatingUser()" title="Add a customer">
 											<i class="fa fa-user"></i>
 											<span class="hidden-sm hidden-xs">Agregar Cliente</span>
 											<span class="hidden-lg hidden-md">+1</span>
 										</button>
-										<button type="button" class="btn btn-default" ng-click="openAddQuickItem()" title="Item">
+										<button type="button" class="btn btn-default" title="Item">
 											<i class="fa fa-plus"></i>
 											<span class="hidden-sm hidden-xs">Producto</span>
 										</button>
@@ -111,7 +282,7 @@
 					<div class="card-footer" id="cart-panel">
 						<div class="btn-group btn-group-justified">
 							<div class="btn-group ng-scope">
-								<button type="button" class="btn btn-default btn-lg" ng-click="openPayBox()">
+								<button type="button" class="btn btn-default btn-lg"  data-toggle="modal" data-target="#modal-pago">
 									<i class="fa fa-money-bill" aria-hidden="true"></i>
 									<span class="hidden-xs">Pagar</span>
 								</button>
@@ -119,11 +290,11 @@
 							<div class="btn-group ng-scope" role="group" ng-controller="saveBox">
 							</div>
 							<div class="btn-group" role="group">
-								<button type="button" id="cart-discount" class="btn btn-default btn-lg" >
+								<button type="button" id="cart-discount" class="btn btn-default btn-lg"  data-toggle="modal" data-target="#modal-descuento">
 									<i class="fa fa-gift"></i> <span class="hidden-xs">Descuento</span></button>
 							</div>
 							<div class="btn-group" role="group">
-								<button type="button" class="btn btn-default btn-lg" id="cart-return-to-order">
+								<button type="button" class="btn btn-default btn-lg" id="cart-return-to-order"  data-toggle="modal" data-target="#modal-cancelar">
 									<i class="fa fa-sync"></i>
 									<span class="hidden-xs">Cancelar Venta</span>
 								</button>
@@ -148,30 +319,19 @@
 								</div>
 							</form>
 						</div>
-						<div class="box-header with-border cattegory-slider" style="padding:0px;">
-							<div class="container-fluid">
+						<div class="card-body">
+							<div class="overflow-auto"style="max-height: 500px;">
 								<div class="row">
-									<div :class="{ 'category-toggled' : status }" @click="status = ! status" class="col-lg-1 col-md-1 hidden-sm hidden-xs text-center toggle-categories" style="padding:0;border-right:solid 1px #EEE;">
-										<i style="font-size:20px;line-height:40px;" class="fa fa-eye"></i>
-									</div>
-									<div class="col-lg-1 col-md-1 hidden-sm hidden-xs text-center slick-button cat-prev" style="padding:0;border-right:solid 1px #EEE;"><i style="font-size:20px;line-height:40px;" class="fa fa-arrow-left"></i>
-									</div>
-									<div class="col-lg-9 col-md-9 col-sm-12 add_slick_inside" style="padding:0;">
-										<div class="slick slick-wrapper"></div>
-									</div>
-									<div class="col-lg-1 col-md-1 hidden-sm hidden-xs text-center slick-button cat-next" style="padding:0;border-left:solid 1px #EEE;"><i style="font-size:20px;line-height:40px;" class="fa fa-arrow-right"></i></div>
+									<?php
+									foreach ($datos as $producto) {
+										echo '<div class="col-md-4">
+												<img onclick="anadir('.$producto['id_product'].','.$producto['code_producto'].',\''.$producto['name_product'].'\','.$producto['price_product'].','.$producto['stock'].',\''.$producto['id_category'].'\')" src="http://multi-nexopos.tendoo.org/public/modules/nexo/images/default.png" title="'.$producto['name_product'].'"width="150" height="150">
+											</div>';
+										}
+									?>
 								</div>
 							</div>
-						</div>
-						<div class="card-body">
-							<div class="direct-chat-messages item-list-container" style="padding:0px;">
-								<div class="row" id="filter-list" style="padding-left:0px;padding-right:0px;margin-left:0px;margin-right:0px;padding-bottom:0px;">
-								</div>
-								<div class="row" id="filter-categories" style="padding-left:0px;padding-right:0px;margin-left:0px;margin-right:0px;padding-bottom:0px;">
-								</div>
-						</div>
 				</div>
-
 			</div>
 		</div>
 	</section>
