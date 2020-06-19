@@ -7,58 +7,65 @@
 	$inventario = new MvcController;
 	$datos = $inventario->verProductos();
 ?>
-
 <div class="container-fluid">
+		<!--MODAL AGREGAR CLIENTES
+		* Proposito: Formulario para agregar cliente desde la venta
+		* Campos:
+			- Nombre Cliente -> ncliente
+			- Correo -> correo
+			- Dirección -> direccion
+			- Celular -> ccelular
+			- Fecha de nacimiento -> cfecha
+		-->
 	    <div class="modal fade" id="modal-cliente">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
-                <div class="modal-header">
+                <div class="modal-header"><!-- inicio de modal-header -->
                     <h4 class="modal-title">Datos del <b>Cliente</b></h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true"></span>
                     </button>
-                </div><!-- /.modal-header -->
+                </div><!-- fin de modal-header -->
                 <form method="post" action="index.php?action=detalle_venta">
-                    <div class="modal-body"  style="height: 400px; overflow: scroll;">
-
+                    <div class="modal-body"  style="height: 400px; overflow: scroll;"><!-- Inicio modal-body cliente-->
                         <div class="row">
                             <div class="col-sm-6">
-                                <div class="form-group">
+                                <div class="form-group"> <!-- Inicio modal-nombre cliente-->
                                     <label for="ncliente">Nombre del Cliente:</label>
                                     <input type="text" class="form-control form-control-sm" placeholder="Nombre(s)" name="ncliente" id="ncliente" required>
-                                </div>
+                                </div><!-- Fin modal-nombre cliente-->
                             </div>
-                            <div class="col-sm-6">
+                            <div class="col-sm-6"><!-- Inicio modal-correo cliente-->
                                 <div class="form-group">
                                     <label for="correo">Correo:</label>
                                     <input type="mail" class="form-control form-control-sm" placeholder="Correo" name="correo" id="correo"  required>
-                                </div>
+                                </div><!-- fin modal-correo cliente-->
                             </div>
                         </div>
                         <hr/>
 
-                        <div class="form-group">
+                        <div class="form-group"><!-- Inicio modal-direccion cliente-->
                             <label for="direccion">Dirección</label>
                             <input type="text" class="form-control form-control-sm" placeholder="Dirección" name="direccion" id="direccion" required>
-                        </div>
+                        </div><!-- Fin modal-direccion cliente-->
 
                         <div class="row">
-                            <div class="col-sm-6">
+                            <div class="col-sm-6"><!-- Inicio modal-correo cliente-->
                                 <div class="form-group">
                                     <label for="ccelular">Celular:</label>
                                     <input type="text" class="form-control form-control-sm" placeholder="Celular" name="ccelular" id="ccelular" required>
-                                </div>
+                                </div><!-- Fin modal-celular cliente-->
                             </div>
 
                             <div class="col-sm-6">
-                                <div class="form-group">
+                                <div class="form-group"><!-- Inicio modal-fecha cliente-->
                                     <label for="cfecha">Fecha de Nacimiento:</label>
                                     <input type="date" class="form-control form-control-sm" placeholder="Fecha de Nacimiento" name="cfecha" id="cfecha" required>
-                                </div>
+                                </div><!-- Fin modal-fecha cliente-->
                             </div>
                         </div>
 
-                    </div><!-- /.modal-body -->
+                    </div><!-- Fin del modal-body cliente -->
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
                         <button type="submit" class="btn btn-primary">Agregar</button>
@@ -70,6 +77,13 @@
         <!-- /.modal-dialog -->
     </div>
     <!-- /.modal -->
+
+    <!--MODAL CANCELAR VENTA
+		* Proposito: Formulario de verificación de cuenta para cancelar venta
+		* Campos:
+			- Usuario -> usertxt
+			- contraseña -> acliente
+		-->
     <div class="modal fade" id="modal-cancelar">
         <div class="modal-dialog modal-sm">
             <div class="modal-content">
@@ -109,7 +123,12 @@
     </div>
     <!-- /.modal -->
 
-    <!-- Modal para aplicar un descuento -->
+
+    <!--MODAL APLICAR DESCUENTO
+		* Proposito: Formulario para gregar descuento a una venta
+		* Campos:
+			- Descuento -> desctxt
+		-->
     <div class="modal fade" id="modal-descuento">
         <div class="modal-dialog modal-sm">
             <div class="modal-content">
@@ -142,7 +161,12 @@
         <!-- /.modal-dialog -->
     </div>
     <!-- /.modal -->
-  <!-- Modal para realizar un pago -->
+
+  <!--MODAL DE PAGO
+		* Proposito: Formulario para agregar monto de pago
+		* Campos:
+			- Pago -> pagoctxt
+  -->
   <div class="modal fade" id="modal-pago">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -155,10 +179,10 @@
                 <form method="post" action="index.php?action=detalle_venta">
                     <div class="modal-body">
 
-                            <p>Ingresa el descuento que desea aplicar.</p>
+                            <p>Ingrega el monto a pagar.</p>
 
                             <div class="form-group">
-                                <label for="pagotxt">Descuento:</label>
+                                <label for="pagotxt">Monto:</label>
                                 <input type="decimal" step="any" class="form-control form-control-sm" placeholder="0.00" min="0" max="1" name="pagoctxt" id="pagotxt" required>
                             </div>
 

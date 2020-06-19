@@ -2,7 +2,7 @@
 
 	class Paginas {
 		public function enlacesPaginasModel($enlacesModel){
-			if ($enlacesModel == "ingresar" || $enlacesModel == "usuarios" || $enlacesModel == "inventario" || $enlacesModel == "categorias" || $enlacesModel == "tablero" || $enlacesModel == "ventas" || $enlacesModel == "salir" || $enlacesModel == "productos" || $enlacesModel == "venta" ) {
+			if ($enlacesModel == "ingresar" || $enlacesModel == "usuarios" || $enlacesModel == "inventario" || $enlacesModel == "categorias" || $enlacesModel == "tablero" || $enlacesModel == "ventas" || $enlacesModel == "salir" || $enlacesModel == "productos" || $enlacesModel == "venta" || $enlacesModel == "clientes"  ) {
 				$module = "views/modules/".$enlacesModel.".php";
 			} else if ($enlacesModel == "index") {
 				$module = "views/modules/tablero.php";

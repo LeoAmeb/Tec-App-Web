@@ -286,7 +286,7 @@ class MvcController{
 						<p>Total de Usuarios</p>
 					</div>
 					<div class="icon">
-						<i class="far fa-address-card"></i>
+						<i class="far fa-user"></i>
 					</div>
 					<a class="small-box-footer" href="index.php?action=usuarios">Más <i class="fas fa-arrow-circle-right"></i></a>
 				</div>
@@ -294,13 +294,13 @@ class MvcController{
     	$respuesta_products =Datos::contarFilasModel("products");
 		echo '
 	        <div class="col-lg-3 col-6">
-				<div class="small-box bg-info">
+				<div class="small-box bg-success">
 					<div class="inner">
 						<h3>'.$respuesta_products["filas"].'</h3>
 						<p>Total de Productos</p>
 					</div>
 					<div class="icon">
-						<i class="far fa-address-card"></i>
+						<i class="fa fa-box"></i>
 					</div>
 					<a class="small-box-footer" href="index.php?action=productos">Más <i class="fas fa-arrow-circle-right"></i></a>
 				</div>
@@ -308,18 +308,43 @@ class MvcController{
     	$respuesta_category =Datos::contarFilasModel("categories");
 		echo '
 	        <div class="col-lg-3 col-6">
-				<div class="small-box bg-info">
+				<div class="small-box bg-warning">
 					<div class="inner">
 						<h3>'.$respuesta_category["filas"].'</h3>
 						<p>Total de Categorias</p>
 					</div>
 					<div class="icon">
-						<i class="far fa-address-card"></i>
+						<i class="fa fa-list"></i>
 					</div>
 					<a class="small-box-footer" href="index.php?action=categorias">Más <i class="fas fa-arrow-circle-right"></i></a>
 				</div>
 	        </div>';
+
+    	$respuesta_category =Datos::contarFilasModel("clients");
+		echo '
+	        <div class="col-lg-3 col-6">
+				<div class="small-box bg-danger">
+					<div class="inner">
+						<h3>'.$respuesta_category["filas"].'</h3>
+						<p>Total de Clientes</p>
+					</div>
+					<div class="icon">
+						<i class="fa fa-address-book"></i>
+					</div>
+					<a class="small-box-footer" href="index.php?action=clientes">Más <i class="fas fa-arrow-circle-right"></i></a>
+				</div>
+	        </div>';
     }
+/*
+* FUNCIONES DE PRODUCTOS
+	- vistaProductsController
+	- registrarProductController
+	- insertarProductController
+	- editarProductoController
+	- actualizarProductController
+	- eliminarProductController
+	- addProductController
+*/
     public function vistaProductsController(){
 		$respuesta = Datos::vistaProductsModel("products");
 		foreach ($respuesta as $row => $item) {
@@ -883,10 +908,122 @@ class MvcController{
             }
         }
     }
-    	public function verProductos(){
-    		$respuesta = Datos::obtenerProductos("products");
-    		return $respuesta;
-    	}
+	public function verProductos(){
+		$respuesta = Datos::obtenerProductos("products");
+		return $respuesta;
+	}
+/*
+* FUNCIONES DE CLIENTES
+	- vistaClientesController - Index del modulo *
+	- registrarClientesController - Formulario de registro
+	- insertarClientesController - Envío de datos al modelo
+	- editarClientesController - Formulario de edición
+	- actualizarClientesController - Envío de datos actualizados al modelo
+	- eliminarClientesController - Eliminar a la base de datos
+	- addClientesController
+*/
+	public function vistaClientesController(){
+		$respuesta = Datos::vistaClientesModel("clients");
+		foreach ($respuesta as $row => $item) {
+			echo '
+				<tr>
+					<td>
+						<a href="index.php?action=clientes&idClienteEditar='.$item["id"].'" class="btn btn-warning btn-sm btn-icon" title="Editar" data-toggle="tooltip"><i class="fa fa-edit"></i></a>
+					</td>
+					<td>
+						<a href="index.php?action=clientes&idBorrar='.$item["id"].'" class="btn btn-warning btn-sm btn-icon" title="Eliminar" data-toggle="tooltip"><i class="fa fa-trash"></i></a>
+					</td>
+					<td>'.$item["id"].'</td>
+					<td>'.$item["client_name"].'</td>
+					<td>'.$item["client_email"].'</td>
+					<td>'.$item["client_phone"].'</td>
+					<td>'.$item["client_address"].'</td>
+					<td>'.$item["client_birthday"].'</td>
+					<td>'.$item["client_purchases"].'</td>
+				</tr>
+			';
+		}
+	}
+	public function registrarClienteController() {
+		?>
+		<div class="col-md-6 mt-3">
+			<div class="card card-primary">
+				<div class="card-header">
+					<h4><b>Registro</b> de clientes</h4>
+				</div>
+				<div class="card-body">
+					<form method="POST" action="index.php?action=productos">
+						<div class="form-group">
+							<label for="nombreClienteTxt">Nombre: </label>
+							<input class="form-control" name="nombreClienteTxt" id="nombreClienteTxt" placeholder="Nombre del cliente" type="text" required>
+						</div>
+						<div class="form-group">
+							<label for="emailClienteTxt">Correo Electrónico: </label>
+							<input class="form-control" name="emailClienteTxt" id="emailClienteTxt" placeholder="Correo Electrónico del Cliente" type="mail" required>
+						</div>
+						<div class="form-group">
+							<label for="celularClienteTxt">Número Celular: </label>
+							<input class="form-control" name="celularClienteTxt" id="celularClienteTxt" placeholder="Número Telefónico del Cliente" type="phone" required>
+						</div>
+						<div class="form-group">
+							<label for="direccionClienteTxt">Dirección: </label>
+							<input class="form-control" name="direccionClienteTxt" id="direccionClienteTxt" placeholder="Código del producto" type="text" required>
+						</div>
+						<div class="form-group">
+							<label for="nacimientoClienteTxt">Fecha de nacimiento: </label>
+							<input class="form-control" name="nacimientoClienteTxt" id="nacimientoClienteTxt" class="form-control" type="date" placeholder="Fecha de nacimiento del cliente" required>
+
+						</div>
+						<div class="form-group">
+							<label for="comprasClienteTxt">Compras: </label>
+							<input class="form-control" name="comprasClienteTxt" id="comprasClienteTxt" class="form-control" type="number" min="1" placeholder="Compras del cliente" required>
+
+						</div>
+						<button class="btn btn-primary" type="submit">Agregar</button>
+					</form>
+				</div>
+			</div>
+		</div>
+		<?php
+	}
+	public function insertarClienteController(){
+		if (isset($_POST["nombreClienteTxt"]) && isset($_POST["emailClienteTxt"])) {
+			$datosController = array("nombreCliente"=>$_POST["nombreClienteTxt"],"emailCliente"=>$_POST["emailClienteTxt"],"celularCliente"=>$_POST["celularClienteTxt"],"direccionCliente"=>$_POST["direccionClienteTxt"],"nacimientoCliente"=>$_POST["nacimientoClienteTxt"],"comprasCliente"=>$_POST["comprasClienteTxt"]);
+			$respuesta = Datos::insertarClienteModel($datosController, "clients");
+			if ($respuesta == "success") {
+				echo '
+					<div class="col-md-6 mt-3">
+						<div class="alert alert-success alert-dismissible">
+							<button class="close" type="button" data-dismiss="alert" aria-hidden="true">x</button>
+							<h5>
+								<i class="icon fas fa-ban"></i>
+									¡Éxito!
+							</h5>
+							Cliente registrado con éxito
+						</div>
+					</div> ';
+			} else {
+				echo '
+					<div class="col-md-6 mt-3">
+						<div class="alert alert-danger alert-dismissible">
+							<button class="close" type="button" data-dismiss="alert" aria-hidden="true">x</button>
+							<h5>
+								<i class="icon fas fa-ban"></i>
+									¡Error!
+							</h5>
+							Error al registrar el cliente
+						</div>
+					</div> ';
+			}
+		}
+
+	}
+	public function actualizarClienteController(){
+
+	}
+	public function eliminarClienteController(){
+
+	}
 }
 
 ?>

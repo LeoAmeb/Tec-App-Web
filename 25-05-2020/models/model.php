@@ -271,6 +271,76 @@
 			$stmt->close();
 		}
 
+		public function vistaClientesModel($tabla){
+			$stmt=Conexion::conectar()->prepare("SELECT * FROM $tabla");
+			$stmt->execute();
+			return $stmt->fetchAll();
+			$stmt->close();
+		}
+
+		public function insertarClientesModel($datosModel, $tabla){
+			$stmt=Conexion::conectar()->prepare("INSERT INTO $tabla (code_producto, name_product, price_product, stock, id_category) VALUES (:nombreCliente, :emailCliente,:celularCliente, :direccionCliente, :nacimientoCliente,:comprasCliente)");
+			$stmt->bindParam(":nombreCliente",$datosModel["nombreCliente"],PDO::PARAM_STR);
+			$stmt->bindParam(":nombre",$datosModel["nombre"],PDO::PARAM_STR);
+			$stmt->bindParam(":precio",$datosModel["precio"],PDO::PARAM_STR);
+			$stmt->bindParam(":stock",$datosModel["stock"],PDO::PARAM_INT);
+			$stmt->bindParam(":categoria",$datosModel["categoria"],PDO::PARAM_INT);
+			if($stmt->execute()){
+				return "success";
+			}else{
+				return "error";
+			}
+			$stmt->close();
+		}
+
+		public function editarClientesModel($datosModel, $tabla){
+			$stmt=Conexion::conectar()->prepare("SELECT id_product AS 'id', code_producto AS 'codigo', name_product AS 'nombre', price_product AS 'precio', stock FROM $tabla WHERE id_product=:id");
+			$stmt->bindParam(":id", $datosModel, PDO::PARAM_INT);
+			$stmt->execute();
+			return $stmt->fetch();
+			$stmt->close();
+		}
+
+		public function pushClientesModel($datosModel, $tabla){
+			$stmt=Conexion::conectar()->prepare("UPDATE $tabla SET stock=stock +:stock WHERE id_product=:id");
+			$stmt->bindParam(":stock",$datosModel["stock"],PDO::PARAM_INT);
+			$stmt->bindParam(":id",$datosModel["id"],PDO::PARAM_INT);
+			if($stmt->execute()){
+				return "success";
+			}else{
+				return "error";
+			}
+			$stmt->close();
+		}
+
+		public function pullClientesModel($datosModel, $tabla){
+			$stmt=Conexion::conectar()->prepare("UPDATE $tabla SET stock=stock -:stock WHERE id_product=:id AND stock>=:stock");
+			$stmt->bindParam(":stock",$datosModel["stock"],PDO::PARAM_INT);
+			$stmt->bindParam(":id",$datosModel["id"],PDO::PARAM_INT);
+			if($stmt->execute()){
+				return "success";
+			}else{
+				return "error";
+			}
+			$stmt->close();
+		}
+
+		public function actualizarClientesModel($datosModel, $tabla){
+			$stmt=Conexion::conectar()->prepare("UPDATE $tabla SET code_producto=:codigo, name_product=:nombre, price_product=:precio, id_category=:categoria, stock=:stock  WHERE id_product=:id");
+			$stmt->bindParam(":codigo",$datosModel["codigo"],PDO::PARAM_STR);
+			$stmt->bindParam(":nombre",$datosModel["nombre"],PDO::PARAM_STR);
+			$stmt->bindParam(":precio",$datosModel["precio"],PDO::PARAM_INT);
+			$stmt->bindParam(":categoria",$datosModel["categoria"],PDO::PARAM_INT);
+			$stmt->bindParam(":stock",$datosModel["stock"],PDO::PARAM_INT);
+			$stmt->bindParam(":id",$datosModel["id"],PDO::PARAM_INT);
+			if($stmt->execute()){
+				return "success";
+			}else{
+				return "error";
+			}
+			$stmt->close();
+		}
+
 	}
 
 ?>
