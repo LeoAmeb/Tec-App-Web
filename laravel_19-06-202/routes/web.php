@@ -14,24 +14,30 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('layout.patron');
+});
+/*
+Route::get('/productos', function () {
+    return 'productos';
 });
 
-Route::post('/productos',function() {
-	return('Almacenando productos (post)');
+Route::post('/productos', function () {
+    return 'productos (post)';
 });
 
-Route::get('/productos',function($id) {
-	return('Actualizando productos'.$id);
+Route::put('/productos{id}', function($id){
+	return ('actualizando producto: ' . $id);
 });
 
-Route::get('saludo/{nombre}/{apodo}',function($nombre,$apodo=NULL) {
+Route::get('saludo/{nombre}/{apodo?}', function($nombre, $apodo=null){
 	//Poner la primera letra en mayuscula
-	$nombre=ucfirst($nombre);
-	if($apodo){
+	$nombre = ucfirst($nombre);
+	if ($apodo) {
 		return "Bienvenido {$nombre}, tu apodo es {$apodo}";
-	}else{
-		return "Bienvenido {$nombre}";
+	} else {
+		return "Buenvenido {$nombre}";
 	}
 });
+*/
 
+Route::resource('empleados', 'EmpleadosController');

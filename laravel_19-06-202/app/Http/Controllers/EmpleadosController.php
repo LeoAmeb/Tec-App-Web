@@ -16,7 +16,7 @@ class EmpleadosController extends Controller
     {
         //
         $empleados = Empleados::all();
-        return view('empleados.index', compact('empleados'));
+        return view('empleados.admin_empleados', compact('empleados'));
     }
 
     /**
@@ -27,7 +27,7 @@ class EmpleadosController extends Controller
     public function create()
     {
         //
-        return view('empleados.create');
+        return view('empleados.alta_empleado');
     }
 
     /**
@@ -79,6 +79,17 @@ class EmpleadosController extends Controller
     public function update(Request $request, $id)
     {
         //
+        /*$validar = $request->validate(['email'=>'required|max:50|unique:empleados,email,' . $id]);
+
+        if ($validar->fails()) {
+            $empleado = ["email" => "Correo ocupado"];
+            return view('empleados.edit', compact('empleado'));
+        } else {
+            $empleado = request()->except(['_token', '_method']);
+            Empleados::where('id', '=', $id)->update($empleado);
+            return redirect('empleados');
+        }*/
+
         $empleado = request()->except(['_token', '_method']);
         Empleados::where('id', '=', $id)->update($empleado);
         return redirect('empleados');
