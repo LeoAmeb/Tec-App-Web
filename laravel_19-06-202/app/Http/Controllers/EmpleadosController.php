@@ -2,110 +2,78 @@
 
 namespace App\Http\Controllers;
 
-use App\Empleados;
 use Illuminate\Http\Request;
+use App\Empleado;
+use App\Departamentos;
+use DB;
 
-class EmpleadosController extends Controller
+class empleadosController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-        $empleados = Empleados::all();
+    //
+    public function index(){
+        //Obtener todos los empleados de la tabla de la bd
+        //$empleados=Empleado::all();
+        //Consulta a la base de datos para que traiga los registros de empleados y el nombre del departamento del empleado
+        $empleados = DB::table('empleados')->join('departamentos', 'empleados.dep_id', '=', 'departamentos.id')->select('empleados.*', 'departamentos.nombre')->get();
+        
+        //Mostrar vista de la consulta de empleados
         return view('empleados.admin_empleados', compact('empleados'));
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-        return view('empleados.alta_empleado');
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-
-        $empleado = request()->except('_token');
-        Empleados::insert($empleado);
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Empleados  $empleados
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Empleados $empleados)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Empleados  $empleados
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-        $empleado = Empleados::findOrFail($id);
-        return view('empleados.edit', compact('empleado'));
 
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Empleados  $empleados
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-        /*$validar = $request->validate(['email'=>'required|max:50|unique:empleados,email,' . $id]);
+    //Controlador para crear nuevo empleado
+    public function create(){
+        $departamentos= Departamentos::all();
+        //Mostrar el formulario para crear empleado
+        return view('empleados.alta_empleado', compact('departamentos'));
 
-        if ($validar->fails()) {
-            $empleado = ["email" => "Correo ocupado"];
-            return view('empleados.edit', compact('empleado'));
-        } else {
-            $empleado = request()->except(['_token', '_method']);
-            Empleados::where('id', '=', $id)->update($empleado);
-            return redirect('empleados');
-        }*/
 
-        $empleado = request()->except(['_token', '_method']);
-        Empleados::where('id', '=', $id)->update($empleado);
+    }
+
+    //controlador para almacenar empleados
+    public function store(Request $request){
+        //retirar los datos del request
+        $datosEmpleado = request()->except('empleado');
+
+        //Insertar en la tabla empleado los datos para la creacion de un nuevo registro
+        $id = DB::table('empleados')->insertGetId($datosEmpleado);
+
+        //Alert::success('Datos guardados con exito');
         return redirect('empleados');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Empleados  $empleados
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-        Empleados::destroy($id);
-        return redirect('empleados');
-
+    //Controlador para editar empleados
+    public function edit($id){
+        //Editar empleados y mandar a la vista la informacion
+        $empleados = Empleado::findOrFail($id);
+        $departamentos= Departamentos::all();
+        //Mostrar la vista
+        return view('empleados.editar_empleado',compact('empleados'), compact('departamentos'));
     }
+
+    //Controldor para actualizar el usuario seleccionado.
+    public function update(Request $request, $id){
+        $empleado = Empleado::findOrFail($id);
+        //Guardando los nuevos valores del empleado
+        $empleado->nombres = $request->input('nombres');
+        $empleado->apellidos = $request->input('apellidos');    
+        $empleado->cedula = $request->input('cedula');
+        $empleado->email = $request->input('email');
+        $empleado->lugar_nacimiento = $request->input('lugar_nacimiento');
+        $empleado->sexo = $request->input('sexo');
+        $empleado->estado_civil = $request->input('estado_civil');
+        $empleado->telefono = $request->input('telefono');
+        $empleado->save();
+
+        return redirect('/empleados');
+    }
+
+    //Controlador para eliminar empleado
+    public function destroy($id){
+        $empleado = Empleado::findOrFail($id);
+        $empleado->delete();
+       // Alert::success('Datos eliminados de la base de datos');
+        return redirect('empleados');
+    }
+    
 }
