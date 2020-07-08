@@ -167,7 +167,6 @@
                     console.log(error);
                 });
             },
-            
             //Limpia de campos
             limpia(){
                 this.nombre = "";
