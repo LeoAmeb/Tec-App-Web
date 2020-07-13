@@ -22,6 +22,7 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 Auth::routes();
 
+
 Route::get('/home', 'HomeController@index')->name('home')->middleware('auth');
 
 Route::group(['middleware' => 'auth'], function () {
@@ -61,3 +62,20 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::put('profile/password', ['as' => 'profile.password', 'uses' => 'ProfileController@password']);
 });
 
+Route::resource('users','UserController');
+
+Route::resource('categories','CategoryController');
+
+Route::resource('clients','ClientController');
+
+Route::resource('microsites','MicrositeController');
+
+Route::resource('orders','OrderController');
+
+Route::resource('products','ProductController');
+
+Route::resource('roles','RoleController');
+
+Route::resource('sales','SaleController');
+
+Route::resource('services','ServiceController');
