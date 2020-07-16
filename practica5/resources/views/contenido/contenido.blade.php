@@ -12,9 +12,6 @@
                     <tabla-component></tabla-component>
                     <!-- Fin ejemplo de tabla Listado -->
                 </div>
-                <!--Inicio del modal agregar/actualizar-->
-
-                <!--Fin del modal-->
                 <!-- Inicio del modal Eliminar -->
                 <div class="modal fade" id="modalEliminar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="display: none;" aria-hidden="true">
                     <div class="modal-dialog modal-danger" role="document">

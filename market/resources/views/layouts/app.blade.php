@@ -38,6 +38,8 @@
         <!-- Material Dashboard DEMO methods, don't include it in your project! -->
         <script src="{{ asset('material') }}/demo/demo.js"></script>
         <script src="{{ asset('material') }}/js/settings.js"></script>
+        
+        <script src="js/app.js"></script>
 
         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCNKp5_Rau5lSB25KOMy84-e2mMs5EX9aU"></script>
         @stack('js')

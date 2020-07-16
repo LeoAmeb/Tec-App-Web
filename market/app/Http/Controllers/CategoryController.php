@@ -14,7 +14,8 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        return view('categories.index');
+        $data = category::all();
+        return view('categories.index', compact("data") );
     }
 
     /**
@@ -33,9 +34,11 @@ class CategoryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
-        //
+    public function store(Request $request){
+        $category = new Category();
+        $category->name = $request->name;
+        $category->description = $request->description;
+        $category->save();
     }
 
     /**
@@ -78,8 +81,12 @@ class CategoryController extends Controller
      * @param  \App\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Category $category)
-    {
-        //
+    public function destroy($id){
+        $usuario = Category::findOrFail($id);
+        $usuario->delete();
+    }
+
+    public function list(){
+        return Category::all();
     }
 }
