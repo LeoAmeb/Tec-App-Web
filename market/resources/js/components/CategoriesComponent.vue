@@ -27,10 +27,10 @@
                             <td  v-text="categories.name"></td>
                             <td  v-text="categories.description"></td>
                             <td class="td-actions text-right">
-                                <a rel="tooltip" class="btn btn-success btn-link" href="#" data-original-title="" title="">
-                                    <i class="material-icons">edit</i>
+                                <!-- <a rel="tooltip" @click="EditCategories(categories.id)" class="btn btn-success btn-link" data-toggle="modal" data-target="#modalEdit" data-original-title="" title="">                                    
+                                     <i class="material-icons">edit</i> 
                                     <div class="ripple-container"></div>
-                                </a>
+                                </a> -->
                             </td>
                             <td class="td-actions text-right">
                                 <a rel="tooltip" class="btn btn-success btn-link" @click="deleteCategories(categories.id)" href="#" data-original-title="" title="">
@@ -60,7 +60,7 @@
                         <div class="form-group row">
                             <label class="col-md-3 form-control-label" for="text-input">Nombre</label>
                             <div class="col-md-9">
-                                <input v-model="name" type="text" id="name" name="name" class="form-control" placeholder="Nombre de la categoría">
+                                <input v-model="name" v-text="arrayCategories.name" type="text" id="name" name="name" class="form-control" placeholder="Nombre de la categoría">
                                 <span class="help-block">(*) Ingrese el nombre de la categoría</span>
                             </div>
                         </div>
@@ -68,7 +68,7 @@
                         <div class="form-group row">
                             <label class="col-md-3 form-control-label" for="text-input">Descripcion</label>
                             <div class="col-md-9">
-                                <input v-model="description" type="text" id="description" name="description" class="form-control" placeholder="Descripción de la categoría">
+                                <input v-model="description" v-text="arrayCategories.description" type="text" id="description" name="description" class="form-control" placeholder="Descripción de la categoría">
                                 <span class="help-block">(*) Ingrese la descripción de la categoría</span>
                             </div>
                         </div>
@@ -96,7 +96,6 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    
                 </div>
                 <div class="modal-footer">
                     <!-- Boton para crear producto -->

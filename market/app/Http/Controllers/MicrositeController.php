@@ -35,7 +35,12 @@ class MicrositeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $microsite = new Microsite();
+        $microsite->name = $request->name;
+        $microsite->description = $request->description;
+        $microsite->latitude = $request->latitude;
+        $microsite->length = $request->length;
+        $microsite->save();
     }
 
     /**
@@ -55,9 +60,8 @@ class MicrositeController extends Controller
      * @param  \App\Microsite  $microsite
      * @return \Illuminate\Http\Response
      */
-    public function edit(Microsite $microsite)
-    {
-        //
+    public function edit($id){
+        return Microsite::findOrFail($id);
     }
 
     /**
@@ -67,9 +71,11 @@ class MicrositeController extends Controller
      * @param  \App\Microsite  $microsite
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Microsite $microsite)
+    public function update(Request $request, $id)
     {
-        //
+        $microsite = Microsite::find($id);
+        $microsite->fill($request->all());
+        $microsite->save();
     }
 
     /**
@@ -78,8 +84,15 @@ class MicrositeController extends Controller
      * @param  \App\Microsite  $microsite
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Microsite $microsite)
+    public function destroy($id)
     {
-        //
+        $usuario = Microsite::findOrFail($id);
+        $usuario->delete();
     }
+
+    public function list()
+    {
+        return Microsite::all();
+    }
+
 }

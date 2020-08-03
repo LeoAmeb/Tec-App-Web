@@ -18,6 +18,18 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+//Rutas categoria
 Route::get('categories','CategoryController@list');
 Route::post('categories','CategoryController@store');
 Route::delete('categories/{id}','CategoryController@destroy');
+
+//Rutas Micrositio
+Route::get('microsites','MicrositeController@list');
+Route::post('microsites','MicrositeController@store');
+Route::delete('microsites/{id}','MicrositeController@destroy');
+
+//Rutas Productos
+Route::get('products','ProductsController@list');
+Route::post('products','ProductsController@store');
+Route::delete('products/{id}','ProductsController@destroy');
+

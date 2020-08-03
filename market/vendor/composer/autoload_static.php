@@ -44,10 +44,6 @@ class ComposerStaticInitb89ff86f0d1580233078ae283bdebdc9
         array (
             'phpDocumentor\\Reflection\\' => 25,
         ),
-        'l' => 
-        array (
-            'lummy\\' => 6,
-        ),
         'X' => 
         array (
             'XdgBaseDir\\' => 11,
@@ -185,10 +181,6 @@ class ComposerStaticInitb89ff86f0d1580233078ae283bdebdc9
             0 => __DIR__ . '/..' . '/phpdocumentor/reflection-common/src',
             1 => __DIR__ . '/..' . '/phpdocumentor/reflection-docblock/src',
             2 => __DIR__ . '/..' . '/phpdocumentor/type-resolver/src',
-        ),
-        'lummy\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/lummy/laravel-vue-api-crud-generator/src',
         ),
         'XdgBaseDir\\' => 
         array (
@@ -498,8 +490,6 @@ class ComposerStaticInitb89ff86f0d1580233078ae283bdebdc9
     );
 
     public static $classMap = array (
-        'App\\Category' => __DIR__ . '/../..' . '/app/Category.php',
-        'App\\Client' => __DIR__ . '/../..' . '/app/Client.php',
         'App\\Console\\Kernel' => __DIR__ . '/../..' . '/app/Console/Kernel.php',
         'App\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',
         'App\\Http\\Controllers\\Auth\\ConfirmPasswordController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/ConfirmPasswordController.php',
@@ -532,18 +522,12 @@ class ComposerStaticInitb89ff86f0d1580233078ae283bdebdc9
         'App\\Http\\Requests\\PasswordRequest' => __DIR__ . '/../..' . '/app/Http/Requests/PasswordRequest.php',
         'App\\Http\\Requests\\ProfileRequest' => __DIR__ . '/../..' . '/app/Http/Requests/ProfileRequest.php',
         'App\\Http\\Requests\\UserRequest' => __DIR__ . '/../..' . '/app/Http/Requests/UserRequest.php',
-        'App\\Microsite' => __DIR__ . '/../..' . '/app/Microsite.php',
-        'App\\Order' => __DIR__ . '/../..' . '/app/Order.php',
-        'App\\Product' => __DIR__ . '/../..' . '/app/Product.php',
         'App\\Providers\\AppServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AppServiceProvider.php',
         'App\\Providers\\AuthServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AuthServiceProvider.php',
         'App\\Providers\\BroadcastServiceProvider' => __DIR__ . '/../..' . '/app/Providers/BroadcastServiceProvider.php',
         'App\\Providers\\EventServiceProvider' => __DIR__ . '/../..' . '/app/Providers/EventServiceProvider.php',
         'App\\Providers\\RouteServiceProvider' => __DIR__ . '/../..' . '/app/Providers/RouteServiceProvider.php',
-        'App\\Role' => __DIR__ . '/../..' . '/app/Role.php',
         'App\\Rules\\CurrentPasswordCheckRule' => __DIR__ . '/../..' . '/app/Rules/CurrentPasswordCheckRule.php',
-        'App\\Sale' => __DIR__ . '/../..' . '/app/Sale.php',
-        'App\\Service' => __DIR__ . '/../..' . '/app/Service.php',
         'App\\User' => __DIR__ . '/../..' . '/app/User.php',
         'Asm89\\Stack\\Cors' => __DIR__ . '/..' . '/asm89/stack-cors/src/Asm89/Stack/Cors.php',
         'Asm89\\Stack\\CorsService' => __DIR__ . '/..' . '/asm89/stack-cors/src/Asm89/Stack/CorsService.php',
@@ -4861,8 +4845,6 @@ class ComposerStaticInitb89ff86f0d1580233078ae283bdebdc9
         'Whoops\\Util\\SystemFacade' => __DIR__ . '/..' . '/filp/whoops/src/Whoops/Util/SystemFacade.php',
         'Whoops\\Util\\TemplateHelper' => __DIR__ . '/..' . '/filp/whoops/src/Whoops/Util/TemplateHelper.php',
         'XdgBaseDir\\Xdg' => __DIR__ . '/..' . '/dnoegel/php-xdg-base-dir/src/Xdg.php',
-        'lummy\\vueApi\\generate' => __DIR__ . '/..' . '/lummy/laravel-vue-api-crud-generator/src/generate.php',
-        'lummy\\vueApi\\vueApiServiceProvider' => __DIR__ . '/..' . '/lummy/laravel-vue-api-crud-generator/src/vueApiServiceProvider.php',
         'phpDocumentor\\Reflection\\DocBlock' => __DIR__ . '/..' . '/phpdocumentor/reflection-docblock/src/DocBlock.php',
         'phpDocumentor\\Reflection\\DocBlockFactory' => __DIR__ . '/..' . '/phpdocumentor/reflection-docblock/src/DocBlockFactory.php',
         'phpDocumentor\\Reflection\\DocBlockFactoryInterface' => __DIR__ . '/..' . '/phpdocumentor/reflection-docblock/src/DocBlockFactoryInterface.php',

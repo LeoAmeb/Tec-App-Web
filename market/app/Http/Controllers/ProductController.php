@@ -82,4 +82,11 @@ class ProductController extends Controller
     {
         //
     }
+
+    public function list(){
+        return Product::select('products.name','products.stock','products.price','microsite.name AS microsite', 'categories.name AS categorie')
+      ->join('microsites','products.microsites_id','=','microsites.id')
+      ->join('categories','products.categories_id','=','categories.id')
+      ->get();
+    }
 }

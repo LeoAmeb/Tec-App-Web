@@ -58,9 +58,9 @@ class CategoryController extends Controller
      * @param  \App\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function edit(Category $category)
+    public function edit($id)
     {
-        //
+        return Category::findOrFail($id);
     }
 
     /**
@@ -70,9 +70,11 @@ class CategoryController extends Controller
      * @param  \App\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Category $category)
+    public function update(Request $request, $id)
     {
-        //
+        $category = Category::find($id);
+        $category->fill($request->all());
+        $category->save();   
     }
 
     /**
