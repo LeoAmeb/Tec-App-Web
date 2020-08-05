@@ -33,3 +33,12 @@ Route::get('products','ProductsController@list');
 Route::post('products','ProductsController@store');
 Route::delete('products/{id}','ProductsController@destroy');
 
+//Rutas Servicios
+Route::get('products','ProductsController@list');
+Route::post('products','ProductsController@store');
+Route::delete('products/{id}','ProductsController@destroy');
+
+//Rutas Clientes
+Route::get('products','ProductsController@list');
+Route::post('products','ProductsController@store');
+Route::delete('products/{id}','ProductsController@destroy');

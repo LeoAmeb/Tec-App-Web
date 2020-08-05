@@ -2,14 +2,14 @@
 <div>
     <div class="card">
         <div class="card-header card-header-success">
-            <h4 class="card-title ">Micrositios regisrtados</h4>
+            <h4 class="card-title ">Productos registrados</h4>
             <p class="card-category">Listado de Micrositios registrados</p>
         </div>
         <div class="card-body">
             <div class="row">
                 <div class="col-12 text-right" >
                     <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#modalNuevo">
-                        <i class="icon-plus"></i>&nbsp;Nuevo Micrositio
+                        <i class="icon-plus"></i>&nbsp;Nuevo Producto
                     </button>
                 </div>
             </div>
@@ -31,7 +31,7 @@
                             <td  v-text="Products.stock"></td>
                             <td  v-text="Products.price"></td>
                             <td  v-text="Products.microsite"></td>
-                            <td> v-text="Products.categorie"</td>
+                            <td  v-text="Products.categorie"></td>
                             <td class="td-actions text-right">
                                 <!-- <a rel="tooltip" class="btn btn-success btn-link" href="#" data-original-title="" title=""> 
                                     <i class="material-icons">edit</i>
@@ -56,7 +56,7 @@
         <div class="modal-dialog modal-primary modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">Agregar categoría</h4>
+                    <h4 class="modal-title">Agregar producto</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">×</span>
                     </button>
@@ -69,7 +69,7 @@
                             <label class="col-md-3 form-control-label" for="text-input">Nombre</label>
                             <div class="col-md-9">
                                 <input v-model="name" type="text" id="name" name="name" class="form-control" placeholder="Nombre" required>
-                                <span class="help-block">(*) Ingrese el nombre del Micrositio</span>
+                                <span class="help-block">(*) Ingrese el nombre del Producto</span>
                             </div>
                         </div>
 
@@ -78,7 +78,7 @@
                             <label class="col-md-3 form-control-label" for="text-input">Descripcion</label>
                             <div class="col-md-9">
                                 <input v-model="description" type="number" id="description" name="description" class="form-control" placeholder="Descripción" required>
-                                <span class="help-block">(*) Ingrese la descripción del Micrositio</span>
+                                <span class="help-block">(*) Ingrese la descripción del Producto</span>
                             </div>
                         </div>
 
@@ -87,7 +87,7 @@
                         <div class="form-group row">
                             <label class="col-md-3 form-control-label" for="text-input">Latitud</label>
                             <div class="col-md-9">
-                                <input v-model="latitude" type="number" id="latitude" name="latitude" class="form-control" placeholder="Descripción" required>
+                                <input v-model="latitude" type="number" id="latitude" name="latitude" class="form-control" placeholder="Latitud" required>
                                 <span class="help-block">(*) Ingrese la latitud</span>
                             </div>
                         </div>
@@ -97,27 +97,27 @@
                         <div class="form-group row">
                             <label class="col-md-3 form-control-label" for="text-input">Longitud</label>
                             <div class="col-md-9">
-                                <input v-model="length" type="number" id="length" name="length" class="form-control" placeholder="Descripción" required>
+                                <input v-model="length" type="number" id="length" name="length" class="form-control" placeholder="Longitud" required>
                                 <span class="help-block">(*) Ingrese la longitud</span>
                             </div>
                         </div>
 
                         <!-- Micrositio -->
                         <div class="form-group row">
-                            <label class="col-md-3 form-control-label" for="text-input">Longitud</label>
+                            <label class="col-md-3 form-control-label" for="text-input">Micrositio</label>
                             <div class="col-md-9">
-                                <input v-model="length" type="number" id="length" name="length" class="form-control" placeholder="Descripción" required>
-                                <span class="help-block">(*) Ingrese la longitud</span>
+                                <input v-model="length" type="text" id="length" name="length" class="form-control" placeholder="Micrositio" required>
+                                <span class="help-block">(*) Ingrese el Micrositio</span>
                             </div>
                         </div>
 
 
                         <!-- Categoría -->
                         <div class="form-group row">
-                            <label class="col-md-3 form-control-label" for="text-input">Longitud</label>
+                            <label class="col-md-3 form-control-label" for="text-input">Categoria</label>
                             <div class="col-md-9">
-                                <input v-model="length" type="number" id="length" name="length" class="form-control" placeholder="Descripción" required>
-                                <span class="help-block">(*) Ingrese la longitud</span>
+                                <input v-model="length" type="text" id="length" name="length" class="form-control" placeholder="Categoria" required>
+                                <span class="help-block">(*) Ingrese el Categoria</span>
                             </div>
                         </div>
 
@@ -176,22 +176,15 @@
                 arrayProducts:[],
             }
         },
-        categories(){
+        Categoriesdata(){
             return{
                 id:'',
                 name:'',
                 arrayCategories:[],
             }
         },
-        microsites(){
-            return{
-                id:'',
-                name:'',
-                arrayMicrosites:[],
-            }
-        },
         methods:{
-            //Function para get los Products mediante axios
+            //Funcion para obtener los productos
             getProducts(){
                 let me = this;
                 //Ruta del controlador
@@ -205,7 +198,6 @@
                     console.log(error);
                 });
 
-                /*
                 //Categorias
                 axios.get(urlCategories).then(function(response){
                     me.arrayCategories = response.data;
@@ -219,9 +211,9 @@
                 }).catch(function (error){
                     console.log(error);
                 });
-                */
 
             },
+            //Guardado de productos
             saveProducts(){
                 let me = this;
                 //Ruta del controlador
@@ -244,6 +236,7 @@
                     console.log(error);
                 });
             },
+            //Eliminacion de productos
             deleteProducts(id){
                 let me = this;
                 let category_id = id;
@@ -257,7 +250,7 @@
                     });
                 }
             },
-            //emptyFields de campos
+            //Limpia de campos
             emptyFields(){
                 this.name = "";
                 this.description = "";

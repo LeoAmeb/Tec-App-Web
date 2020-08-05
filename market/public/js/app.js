@@ -2522,22 +2522,15 @@ __webpack_require__.r(__webpack_exports__);
       arrayProducts: []
     };
   },
-  categories: function categories() {
+  Categoriesdata: function Categoriesdata() {
     return {
       id: '',
       name: '',
       arrayCategories: []
     };
   },
-  microsites: function microsites() {
-    return {
-      id: '',
-      name: '',
-      arrayMicrosites: []
-    };
-  },
   methods: {
-    //Function para get los Products mediante axios
+    //Funcion para obtener los productos
     getProducts: function getProducts() {
       var me = this; //Ruta del controlador
 
@@ -2548,22 +2541,21 @@ __webpack_require__.r(__webpack_exports__);
         me.arrayProducts = response.data;
       })["catch"](function (error) {
         console.log(error);
+      }); //Categorias
+
+      axios.get(urlCategories).then(function (response) {
+        me.arrayCategories = response.data;
+      })["catch"](function (error) {
+        console.log(error);
+      }); //Servicios
+
+      axios.get(urlCategories).then(function (response) {
+        me.arrayCategories = response.data;
+      })["catch"](function (error) {
+        console.log(error);
       });
-      /*
-      //Categorias
-      axios.get(urlCategories).then(function(response){
-          me.arrayCategories = response.data;
-      }).catch(function (error){
-          console.log(error);
-      });
-       //Servicios
-      axios.get(urlCategories).then(function(response){
-          me.arrayCategories = response.data;
-      }).catch(function (error){
-          console.log(error);
-      });
-      */
     },
+    //Guardado de productos
     saveProducts: function saveProducts() {
       var me = this; //Ruta del controlador
 
@@ -2585,6 +2577,7 @@ __webpack_require__.r(__webpack_exports__);
         console.log(error);
       });
     },
+    //Eliminacion de productos
     deleteProducts: function deleteProducts(id) {
       var me = this;
       var category_id = id;
@@ -2597,7 +2590,7 @@ __webpack_require__.r(__webpack_exports__);
         });
       }
     },
-    //emptyFields de campos
+    //Limpia de campos
     emptyFields: function emptyFields() {
       this.name = "";
       this.description = "";
@@ -39506,7 +39499,9 @@ var render = function() {
                     domProps: { textContent: _vm._s(Products.microsite) }
                   }),
                   _vm._v(" "),
-                  _c("td", [_vm._v(' v-text="Products.categorie"')]),
+                  _c("td", {
+                    domProps: { textContent: _vm._s(Products.categorie) }
+                  }),
                   _vm._v(" "),
                   _c("td", { staticClass: "td-actions text-right" }),
                   _vm._v(" "),
@@ -39621,7 +39616,7 @@ var render = function() {
                         }),
                         _vm._v(" "),
                         _c("span", { staticClass: "help-block" }, [
-                          _vm._v("(*) Ingrese el nombre del Micrositio")
+                          _vm._v("(*) Ingrese el nombre del Producto")
                         ])
                       ])
                     ]),
@@ -39666,7 +39661,7 @@ var render = function() {
                         }),
                         _vm._v(" "),
                         _c("span", { staticClass: "help-block" }, [
-                          _vm._v("(*) Ingrese la descripción del Micrositio")
+                          _vm._v("(*) Ingrese la descripción del Producto")
                         ])
                       ])
                     ]),
@@ -39696,7 +39691,7 @@ var render = function() {
                             type: "number",
                             id: "latitude",
                             name: "latitude",
-                            placeholder: "Descripción",
+                            placeholder: "Latitud",
                             required: ""
                           },
                           domProps: { value: _vm.latitude },
@@ -39741,7 +39736,7 @@ var render = function() {
                             type: "number",
                             id: "length",
                             name: "length",
-                            placeholder: "Descripción",
+                            placeholder: "Longitud",
                             required: ""
                           },
                           domProps: { value: _vm.length },
@@ -39768,7 +39763,7 @@ var render = function() {
                           staticClass: "col-md-3 form-control-label",
                           attrs: { for: "text-input" }
                         },
-                        [_vm._v("Longitud")]
+                        [_vm._v("Micrositio")]
                       ),
                       _vm._v(" "),
                       _c("div", { staticClass: "col-md-9" }, [
@@ -39783,10 +39778,10 @@ var render = function() {
                           ],
                           staticClass: "form-control",
                           attrs: {
-                            type: "number",
+                            type: "text",
                             id: "length",
                             name: "length",
-                            placeholder: "Descripción",
+                            placeholder: "Micrositio",
                             required: ""
                           },
                           domProps: { value: _vm.length },
@@ -39801,7 +39796,7 @@ var render = function() {
                         }),
                         _vm._v(" "),
                         _c("span", { staticClass: "help-block" }, [
-                          _vm._v("(*) Ingrese la longitud")
+                          _vm._v("(*) Ingrese el Micrositio")
                         ])
                       ])
                     ]),
@@ -39813,7 +39808,7 @@ var render = function() {
                           staticClass: "col-md-3 form-control-label",
                           attrs: { for: "text-input" }
                         },
-                        [_vm._v("Longitud")]
+                        [_vm._v("Categoria")]
                       ),
                       _vm._v(" "),
                       _c("div", { staticClass: "col-md-9" }, [
@@ -39828,10 +39823,10 @@ var render = function() {
                           ],
                           staticClass: "form-control",
                           attrs: {
-                            type: "number",
+                            type: "text",
                             id: "length",
                             name: "length",
-                            placeholder: "Descripción",
+                            placeholder: "Categoria",
                             required: ""
                           },
                           domProps: { value: _vm.length },
@@ -39846,7 +39841,7 @@ var render = function() {
                         }),
                         _vm._v(" "),
                         _c("span", { staticClass: "help-block" }, [
-                          _vm._v("(*) Ingrese la longitud")
+                          _vm._v("(*) Ingrese el Categoria")
                         ])
                       ])
                     ])
@@ -39956,7 +39951,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "card-header card-header-success" }, [
       _c("h4", { staticClass: "card-title " }, [
-        _vm._v("Micrositios regisrtados")
+        _vm._v("Productos registrados")
       ]),
       _vm._v(" "),
       _c("p", { staticClass: "card-category" }, [
@@ -39982,7 +39977,7 @@ var staticRenderFns = [
           },
           [
             _c("i", { staticClass: "icon-plus" }),
-            _vm._v(" Nuevo Micrositio\r\n                    ")
+            _vm._v(" Nuevo Producto\r\n                    ")
           ]
         )
       ])
@@ -40013,7 +40008,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "modal-header" }, [
-      _c("h4", { staticClass: "modal-title" }, [_vm._v("Agregar categoría")]),
+      _c("h4", { staticClass: "modal-title" }, [_vm._v("Agregar producto")]),
       _vm._v(" "),
       _c(
         "button",
