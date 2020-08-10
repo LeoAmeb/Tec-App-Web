@@ -1,6 +1,8 @@
-@extends('layouts.app', ['class' => 'off-canvas-sidebar', 'activePage' => 'login', 'title' => __('Tablero')])
-
-@section('content')
+<!-- Compilado de CSS cos webpack.mix.js -->
+<link href="{{ asset('material') }}/css/all.css" rel="stylesheet" />
+    
+<!-- CSS Just for demo purpose, don't include it in your project -->
+<link href="{{ asset('material') }}/demo/demo.css" rel="stylesheet" />
 <div class="container" style="height: auto;">
   <div class="row align-items-center">
     <div class="col-md-9 ml-auto mr-auto mb-3 text-center">
@@ -88,4 +90,3 @@
     </div>
   </div>
 </div>
-@endsection

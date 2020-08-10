@@ -31,10 +31,10 @@
                             <td  v-text="Microsites.latitude"></td>
                             <td  v-text="Microsites.length"></td>
                             <td class="td-actions text-right">
-                                <!-- <a rel="tooltip" class="btn btn-success btn-link" href="#" data-original-title="" title=""> 
+                                <a rel="tooltip" class="btn btn-success btn-link"  data-target="#modalNuevo" data-toggle="modal"> 
                                     <i class="material-icons">edit</i>
                                     <div class="ripple-container"></div>
-                                </a> -->
+                                </a>
                             </td>
                             <td class="td-actions text-right">
                                 <a rel="tooltip" class="btn btn-success btn-link" @click="deleteMicrosites(Microsites.id)" href="#" data-original-title="" title="">
@@ -50,7 +50,7 @@
     </div>
 
     <!-- Modal de agregar Microsites -->
-    <div class="modal fade" id="modalNuevo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="display: none;" aria-hidden="true">
+    <div class="modal fade" id="modalNuevo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="display: none;" aria-hidden="true" data-toggle="modal">
         <div class="modal-dialog modal-primary modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">

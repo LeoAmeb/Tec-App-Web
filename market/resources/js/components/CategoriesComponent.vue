@@ -27,12 +27,6 @@
                             <td  v-text="categories.name"></td>
                             <td  v-text="categories.description"></td>
                             <td class="td-actions text-right">
-                                <!-- <a rel="tooltip" @click="EditCategories(categories.id)" class="btn btn-success btn-link" data-toggle="modal" data-target="#modalEdit" data-original-title="" title="">                                    
-                                     <i class="material-icons">edit</i> 
-                                    <div class="ripple-container"></div>
-                                </a> -->
-                            </td>
-                            <td class="td-actions text-right">
                                 <a rel="tooltip" class="btn btn-success btn-link" @click="deleteCategories(categories.id)" href="#" data-original-title="" title="">
                                     <i class="material-icons">delete</i>
                                     <div class="ripple-container"></div>
@@ -46,7 +40,7 @@
     </div>
 
     <!-- Modal de agregar Categories -->
-    <div class="modal fade" id="modalNuevo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="display: none;" aria-hidden="true">
+    <div class="modal fade" id="modalNuevo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="display: none;" aria-hidden="true" data-toggle="modal">
         <div class="modal-dialog modal-primary modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">

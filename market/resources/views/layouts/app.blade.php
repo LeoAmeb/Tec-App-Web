@@ -23,23 +23,23 @@
     </head>
     <body class="{{ $class ?? '' }}">
         @auth()
+        <div id="app">
+        </div>
             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                 @csrf
             </form>
-            @include('layouts.page_templates.auth')
         @endauth
         @guest()
-            @include('layouts.page_templates.guest')
+
         @endguest
         
         <!-- Compilado de JS con webpack.mix.js -->
         <script src="{{ asset('material') }}/js/all.js"></script>
+        <script src="{{ asset ('js/app.js')}}"></script>
 
         <!-- Material Dashboard DEMO methods, don't include it in your project! -->
         <script src="{{ asset('material') }}/demo/demo.js"></script>
         <script src="{{ asset('material') }}/js/settings.js"></script>
-        
-        <script src="js/app.js"></script>
 
         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCNKp5_Rau5lSB25KOMy84-e2mMs5EX9aU"></script>
         @stack('js')

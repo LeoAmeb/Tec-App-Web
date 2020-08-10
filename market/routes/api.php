@@ -29,16 +29,16 @@ Route::post('microsites','MicrositeController@store');
 Route::delete('microsites/{id}','MicrositeController@destroy');
 
 //Rutas Productos
-Route::get('products','ProductsController@list');
-Route::post('products','ProductsController@store');
-Route::delete('products/{id}','ProductsController@destroy');
+Route::get('products','ProductController@list');
+Route::post('products','ProductController@store');
+Route::delete('products/{id}','ProductController@destroy');
 
 //Rutas Servicios
-Route::get('products','ProductsController@list');
-Route::post('products','ProductsController@store');
-Route::delete('products/{id}','ProductsController@destroy');
+// Route::get('products','ProductsController@list');
+// Route::post('products','ProductsController@store');
+// Route::delete('products/{id}','ProductsController@destroy');
 
 //Rutas Clientes
-Route::get('products','ProductsController@list');
-Route::post('products','ProductsController@store');
-Route::delete('products/{id}','ProductsController@destroy');
+// Route::get('products','ProductsController@list');
+// Route::post('products','ProductsController@store');
+// Route::delete('products/{id}','ProductsController@destroy');

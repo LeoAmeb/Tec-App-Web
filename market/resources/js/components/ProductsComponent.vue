@@ -1,6 +1,6 @@
 <template>
 <div>
-    <div class="card">
+    <div class="card" data-toggle="modal" >
         <div class="card-header card-header-success">
             <h4 class="card-title ">Productos registrados</h4>
             <p class="card-category">Listado de Micrositios registrados</p>
@@ -33,13 +33,13 @@
                             <td  v-text="Products.microsite"></td>
                             <td  v-text="Products.categorie"></td>
                             <td class="td-actions text-right">
-                                <!-- <a rel="tooltip" class="btn btn-success btn-link" href="#" data-original-title="" title=""> 
+                                <a rel="tooltip" class="btn btn-success btn-link" href="#" data-original-title="" title=""> 
                                     <i class="material-icons">edit</i>
                                     <div class="ripple-container"></div>
-                                </a> -->
+                                </a>
                             </td>
                             <td class="td-actions text-right">
-                                <a rel="tooltip" class="btn btn-success btn-link" @click="deleteProducts(Products.id)" href="#" data-original-title="" title="">
+                                <a rel="tooltip" class="btn btn-success btn-link" @click="deleteProducts(Products.id)" data-original-title="" title="">
                                     <i class="material-icons">delete</i>
                                     <div class="ripple-container"></div>
                                 </a>
@@ -52,7 +52,7 @@
     </div>
 
     <!-- Modal de agregar Products -->
-    <div class="modal fade" id="modalNuevo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="display: none;" aria-hidden="true">
+    <div class="modal fade" id="modalNuevo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="display: none;" aria-hidden="true" data-toggle="modal">
         <div class="modal-dialog modal-primary modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -75,39 +75,28 @@
 
                         <!-- Stock -->
                         <div class="form-group row">
+                            <label class="col-md-3 form-control-label" for="text-input">Stock</label>
+                            <div class="col-md-9">
+                                <input v-model="stock" type="number" id="stock" name="stock" class="form-control" placeholder="Stock" required>
+                                <span class="help-block">(*) Ingrese el stock del Producto</span>
+                            </div>
+                        </div>
+
+                        <!-- Price -->
+                        <div class="form-group row">
+                            <label class="col-md-3 form-control-label" for="text-input">Precio</label>
+                            <div class="col-md-9">
+                                <input v-model="price" type="number" id="price" name="price" class="form-control" placeholder="Price" required>
+                                <span class="help-block">(*) Ingrese el precio del producto</span>
+                            </div>
+                        </div>
+
+                        <!-- Description -->
+                        <div class="form-group row">
                             <label class="col-md-3 form-control-label" for="text-input">Descripcion</label>
                             <div class="col-md-9">
-                                <input v-model="description" type="number" id="description" name="description" class="form-control" placeholder="Descripción" required>
-                                <span class="help-block">(*) Ingrese la descripción del Producto</span>
-                            </div>
-                        </div>
-
-                        <!-- price -->
-
-                        <div class="form-group row">
-                            <label class="col-md-3 form-control-label" for="text-input">Latitud</label>
-                            <div class="col-md-9">
-                                <input v-model="latitude" type="number" id="latitude" name="latitude" class="form-control" placeholder="Latitud" required>
-                                <span class="help-block">(*) Ingrese la latitud</span>
-                            </div>
-                        </div>
-
-                        <!-- description -->
-
-                        <div class="form-group row">
-                            <label class="col-md-3 form-control-label" for="text-input">Longitud</label>
-                            <div class="col-md-9">
-                                <input v-model="length" type="number" id="length" name="length" class="form-control" placeholder="Longitud" required>
-                                <span class="help-block">(*) Ingrese la longitud</span>
-                            </div>
-                        </div>
-
-                        <!-- Micrositio -->
-                        <div class="form-group row">
-                            <label class="col-md-3 form-control-label" for="text-input">Micrositio</label>
-                            <div class="col-md-9">
-                                <input v-model="length" type="text" id="length" name="length" class="form-control" placeholder="Micrositio" required>
-                                <span class="help-block">(*) Ingrese el Micrositio</span>
+                                <input v-model="description" type="text" id="description" name="description" class="form-control" placeholder="Descripcion" required>
+                                <span class="help-block">(*) Ingrese la Descripcion del producto</span>
                             </div>
                         </div>
 
@@ -116,8 +105,23 @@
                         <div class="form-group row">
                             <label class="col-md-3 form-control-label" for="text-input">Categoria</label>
                             <div class="col-md-9">
-                                <input v-model="length" type="text" id="length" name="length" class="form-control" placeholder="Categoria" required>
-                                <span class="help-block">(*) Ingrese el Categoria</span>
+                                <!-- <input v-model="length" type="text" id="length" name="length" class="form-control" placeholder="Categoria" required>
+                                <span class="help-block">(*) Ingrese el Categoria</span> -->
+                                <select name="length" id="length" v-model="categories_id" class="form-control">
+                                    <option v-for="categoria in arrayCategories" v-bind:value="categoria.id">{{categoria.name}}</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Micrositio -->
+                        <div class="form-group row">
+                            <label class="col-md-3 form-control-label" for="text-input">Micrositio</label>
+                            <div class="col-md-9">
+                                <!-- <input v-model="length" type="text" id="length" name="length" class="form-control" placeholder="Categoria" required>
+                                <span class="help-block">(*) Ingrese el Categoria</span> -->
+                                <select name="length" v-model="microsites_id" id="length" class="form-control">
+                                    <option v-for="micrositio in arrayMicrosites" v-bind:value="micrositio.id">{{micrositio.name}}</option>
+                                </select>
                             </div>
                         </div>
 
@@ -165,22 +169,18 @@
         mounted() {
             console.log('Component mounted.');
             this.getProducts();
+            this.getMicrosites();
         },
         data(){
             return{
                 name:'',
                 stock:'',
                 price:'',
-                microsite:'',
-                categorie:'',
+                microsites_id:'',
+                categories_id:'',
                 arrayProducts:[],
-            }
-        },
-        Categoriesdata(){
-            return{
-                id:'',
-                name:'',
                 arrayCategories:[],
+                arrayMicrosites:[]
             }
         },
         methods:{
@@ -221,9 +221,11 @@
                 axios.post(url,{ 
                     //Propiedades del producto
                     'name':this.name,
+                    'stock': this.stock,
+                    'price': this.price,
                     'description':this.description,
-                    'latitude':this.latitude,
-                    'length':this.length
+                    'microsites_id': this.microsites_id,
+                    'categories_id': this.categories_id
                 }).then(function (response) {
                     //Se refrescan los datos con la función de getProducts();
                     me.getProducts();
@@ -238,9 +240,11 @@
             },
             //Eliminacion de productos
             deleteProducts(id){
+                console.log("ELIMINAR");
+                console.log(id);
                 let me = this;
                 let category_id = id;
-                if (confirm('¿Deseas eliminar la categoria?')){
+                if (confirm('¿Deseas eliminar el producto?')){
                     axios.delete('/api/products/' + category_id)
                     .then(function (response){
                         me.getProducts();
@@ -250,13 +254,19 @@
                     });
                 }
             },
-            //Limpia de campos
-            emptyFields(){
-                this.name = "";
-                this.description = "";
-                this.latitude = "";
-                this.length = "";
-                this.update = 0;
+            getCategorias(){
+                let me = this;
+                let url = '/api/categories'
+                axios.get(url).then(function (response){
+                    me.arrayCategories = response.data;
+                })
+            },
+            getMicrosites(){
+                let me = this;
+                let url = '/api/microsites'
+                axios.get(url).then(function (response){
+                    me.arrayMicrosites = response.data;
+                })
             }
         }
     }
