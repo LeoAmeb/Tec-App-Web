@@ -7,8 +7,6 @@
 require('./bootstrap');
 
 window.Vue = require('vue');
-/* superuser puede crear superuser, administrador de micrositio y clientes */
-
 
 
 /**
@@ -19,77 +17,53 @@ window.Vue = require('vue');
  * Eg. ./components/ExampleComponent.vue -> <example-component></example-component>
  */
 
-
-//Vue.component('example-component', require('./components/ExampleComponent.vue').default);
-
+// const files = require.context('./', true, /\.vue$/i)
+// files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-import VueRouter from 'vue-router'
-
-Vue.use(VueRouter)
-
-import VueAxios from 'vue-axios'
-import axios from 'axios'
-
-import App from './app.vue'
-import Mapa from './mapa.vue'
-import GoogleMap from "./components/GoogleMap.vue";
-
-import categorias from './components/CategoriesComponent.vue'
-import productos from './components/ProductsComponent.vue'
-import microsites from './components/MicrositesComponent.vue'
-
+import App from './App.vue';
+import App2 from './App2.vue';
+import VueRouter from 'vue-router';
+import VueAxios from 'vue-axios';
+import axios from 'axios';
+import {routes,guestRoutes} from './routes';
+import Vue from 'vue'
 import * as VueGoogleMaps from "vue2-google-maps";
 
+Vue.use(VueRouter);
+Vue.use(VueAxios,axios);
 Vue.use(VueGoogleMaps, {
-  load: {
-    key: "AIzaSyCeaxA8PigzhmvYSteAVU3dZS6S0h87UEI",
-    libraries: "places" // necessary for places input
-  }
+    load: {
+      key: "AIzaSyCeaxA8PigzhmvYSteAVU3dZS6S0h87UEI",
+      libraries: "places" // necessary for places input
+    }
+  });
+
+
+const router = new VueRouter({
+    mode: 'history',
+    routes: routes
 });
 
 
-const routes = [
-    {
-        path: '/categories',
-        name: 'categorias',
-        component: categorias
-    },
-    {
-        path: '/products',
-        name: 'products',
-        component: productos
-    },
-    {
-        path: '/microsites',
-        name: 'microsites',
-        component: microsites
-    },
-    {
-        path: '/',
-        name: 'mapa',
-        component: GoogleMap
-    }
-]
+const router2 = new VueRouter({
+  mode: 'history',
+  routes: guestRoutes
+});
 
-const files = require.context('./', true, /\.vue$/i)
-files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
+const app2 = new Vue({
+  el:'#app2',
+  router: router2,
+  render:h=>h(App2),
+});
 
-const router =  new VueRouter({
-    mode: 'history',
-    routes: routes
-})
-
-/*const app = new Vue({
+const app = new Vue({
     el: '#app',
-    router
-}).$mount('#app');*/
+    router: router,
+    render:h => h(App),
+});
 
-const app = new Vue(Vue.util.extend({router}, App)).$mount('#app');
-const mapa = new Vue(Vue.util.extend({router}, Mapa)).$mount('#mapa');
-
-//module.exports = router;

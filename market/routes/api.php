@@ -18,27 +18,28 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-//Rutas categoria
-Route::get('categories','CategoryController@list');
-Route::post('categories','CategoryController@store');
-Route::delete('categories/{id}','CategoryController@destroy');
+Route::get('shops', 'ShopsController@list');
+Route::get('shops/{id}', 'ShopsController@get');
+Route::post('shops', 'ShopsController@create');
+Route::put('shops/{id}', 'ShopsController@update');
+Route::delete('shops/{id}', 'ShopsController@delete');
 
-//Rutas Micrositio
-Route::get('microsites','MicrositeController@list');
-Route::post('microsites','MicrositeController@store');
-Route::delete('microsites/{id}','MicrositeController@destroy');
+Route::get('users', 'UsersController@list');
+Route::get('users/{id}', 'UsersController@get');
+Route::post('users', 'UsersController@create');
+Route::put('users/{id}', 'UsersController@update');
+Route::delete('users/{id}', 'UsersController@delete');
 
-//Rutas Productos
-Route::get('products','ProductController@list');
-Route::post('products','ProductController@store');
-Route::delete('products/{id}','ProductController@destroy');
+Route::get('users_shop', 'UsersController@getUserShops');
 
-//Rutas Servicios
-// Route::get('products','ProductsController@list');
-// Route::post('products','ProductsController@store');
-// Route::delete('products/{id}','ProductsController@destroy');
+Route::get('products', 'ProductsController@list');
+Route::get('products/{id}', 'ProductsController@get');
+Route::post('products', 'ProductsController@create');
+Route::put('products/{id}', 'ProductsController@update');
+Route::delete('products/{id}', 'ProductsController@delete');
 
-//Rutas Clientes
-// Route::get('products','ProductsController@list');
-// Route::post('products','ProductsController@store');
-// Route::delete('products/{id}','ProductsController@destroy');
+Route::get('services', 'ServicesController@list');
+Route::get('services/{id}', 'ServicesController@get');
+Route::post('services', 'ServicesController@create');
+Route::put('services/{id}', 'ServicesController@update');
+Route::delete('services/{id}', 'ServicesController@delete');

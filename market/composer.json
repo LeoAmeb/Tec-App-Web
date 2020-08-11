@@ -15,7 +15,9 @@
         "laravel-frontend-presets/material-dashboard": "^1.1",
         "laravel/framework": "^7.0",
         "laravel/tinker": "^2.0",
-        "laravel/ui": "^2.1"
+        "laravel/ui": "^2.1",
+        "lummy/laravel-vue-api-crud-generator": "^1.1",
+        "spatie/laravel-permission": "^3.13"
     },
     "require-dev": {
         "facade/ignition": "^2.0",
@@ -36,6 +38,7 @@
     },
     "autoload": {
         "psr-4": {
+            "LaravelFrontendPresets\\MaterialPreset\\": "presets/material/src",
             "App\\": "app/"
         },
         "classmap": [
