@@ -79,3 +79,27 @@ Route::get('ventahasproducts/{id}', 'VentahasproductsController@get');
 Route::post('ventahasproducts', 'VentahasproductsController@create');
 Route::put('ventahasproducts/{id}', 'VentahasproductsController@update');
 Route::delete('ventahasproducts/{id}', 'VentahasproductsController@delete');
+
+Route::get('ventas', 'VentasController@list');
+Route::get('ventas/{id}', 'VentasController@get');
+Route::post('ventas', 'VentasController@create');
+Route::put('ventas/{id}', 'VentasController@update');
+Route::delete('ventas/{id}', 'VentasController@delete');
+
+Route::get('ventas', 'VentasController@list');
+Route::get('ventas/{id}', 'VentasController@get');
+Route::post('ventas', 'VentasController@create');
+Route::put('ventas/{id}', 'VentasController@update');
+Route::delete('ventas/{id}', 'VentasController@delete');
+
+Route::get('ventas', 'VentasController@list');
+Route::get('ventas/{id}', 'VentasController@get');
+Route::post('ventas', 'VentasController@create');
+Route::put('ventas/{id}', 'VentasController@update');
+Route::delete('ventas/{id}', 'VentasController@delete');
+
+Route::get('ventas', 'VentasController@list');
+Route::get('ventas/{id}', 'VentasController@get');
+Route::post('ventas', 'VentasController@create');
+Route::put('ventas/{id}', 'VentasController@update');
+Route::delete('ventas/{id}', 'VentasController@delete');

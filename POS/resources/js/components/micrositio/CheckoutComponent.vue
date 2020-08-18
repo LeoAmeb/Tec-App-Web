@@ -37,7 +37,9 @@
 
                 <ul class="list-group">
                     <li class="list-group-item">
-                        Subtotal ({{ carrito.length }} items): ${{ subtotal }}
+                        Subtotal ({{ form.cantidadTotal }} items): ${{
+                            subtotal
+                        }}
                         <!---->
                     </li>
                     <li class="list-group-item">
@@ -63,7 +65,7 @@
                     data-toggle="modal"
                     data-target="#exampleModal"
                 >
-                    Launch demo modal
+                    Ir a pagar
                 </button>
             </div>
         </div>
@@ -92,62 +94,71 @@
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <div class="modal-body">
-                        <table class="table product-card-font">
-                            <thead>
-                                <tr>
-                                    <td>Producto</td>
-                                    <td>Cantidad</td>
-                                    <td>Total</td>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr
-                                    v-for="(producto, index) in carrito"
-                                    :key="index"
-                                >
-                                    <td>{{ producto.nombre }}</td>
-                                    <td>{{ producto.qty }}</td>
-                                    <td>
-                                        {{ producto.precio * producto.qty }}
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                        <div class="row mx-0 mb-4">
-                            <div class="col-6">
-                                <h5>Total</h5>
+                    <form @submit.prevent="createVenta">
+                        <div class="modal-body">
+                            <table class="table product-card-font">
+                                <thead>
+                                    <tr>
+                                        <td>Producto</td>
+                                        <td>Cantidad</td>
+                                        <td>Total</td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr
+                                        v-for="(producto, index) in carrito"
+                                        :key="index"
+                                    >
+                                        <td>{{ producto.nombre }}</td>
+                                        <td>{{ producto.qty }}</td>
+                                        <td>
+                                            {{ producto.precio * producto.qty }}
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <div class="row mx-0 mb-4">
+                                <div class="col-6">
+                                    <h5>Total</h5>
+                                </div>
+                                <div class="col-6">
+                                    <h5>${{ total }}</h5>
+                                </div>
                             </div>
-                            <div class="col-6">
-                                <h5>${{ total }}</h5>
-                            </div>
-                        </div>
 
-                        <input
-                            class="form-control"
-                            v-model="form.cantidadTotal"
-                            type="number"
-                            id="pago"
-                        />
-                        <input
-                            class="form-control"
-                            v-model="form.total"
-                            type="number"
-                            id="pago"
-                        />
-                    </div>
-                    <div class="modal-footer">
-                        <button
-                            type="button"
-                            class="btn btn-secondary"
-                            data-dismiss="modal"
-                        >
-                            Cancelar Venta
-                        </button>
-                        <button type="button" class="btn btn-primary">
-                            Pagar
-                        </button>
-                    </div>
+                            <input
+                                class="form-control"
+                                v-model="form.cantidadTotal"
+                                type="number"
+                                hidden
+                                id="pago"
+                            />
+                            <input
+                                class="form-control"
+                                v-model="form.total"
+                                type="number"
+                                hidden
+                                id="pago"
+                            />
+                        </div>
+                        <div class="modal-footer">
+                            <button
+                                type="button"
+                                class="btn btn-secondary"
+                                data-dismiss="modal"
+                            >
+                                Cancelar Venta
+                            </button>
+                            <button
+                                class="button"
+                                type="submit"
+                                :disabled="form.busy"
+                                name="button"
+                            >
+                                {{ form.busy ? "Please wait..." : "Pagar" }}
+                            </button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
@@ -155,6 +166,8 @@
 </template>
 
 <script>
+import { Form, HasError, AlertError } from "vform";
+
 export default {
     props: {
         carrito: Array
@@ -164,7 +177,8 @@ export default {
             envio: 60.0,
             form: new Form({
                 total: "",
-                cantidad: ""
+                folio: "2210",
+                cantidadTotal: 0
             })
         };
     },
@@ -172,33 +186,34 @@ export default {
         deleteCart() {},
         subtotal() {
             var subtotal = 0.0;
+            var cant = 0;
             if (this.carrito.length > 0) {
                 this.carrito.forEach(item => {
                     console.log();
+                    cant = cant + item.qty;
                     subtotal = subtotal + parseFloat(item.precio) * item.qty;
                 });
             }
+            this.form.cantidadTotal = cant;
             return subtotal;
         },
         total() {
             var total = this.subtotal;
             total = total + this.envio;
+            this.form.total = total;
             return total;
-        },
-        cantidadTotal() {
-            var cantidadTotal = 0;
-            if (this.carrito.length > 0) {
-                this.carrito.forEach(item => {
-                    console.log();
-                    cantidadTotal = item.qty + cantidadTotal;
-                });
-            }
-            this.form.cantidadTotal = cantidadTotal;
-            return cantidadTotal;
         }
     },
 
     mounted() {},
-    methods: {}
+    methods: {
+        createVenta: function() {
+            var that = this;
+            this.form.folio = this.form.folio +this.cant;
+            this.form.post("/api/ventas").then(function(response) {
+                //that.ventas.push(response.data);
+            });
+        }
+    }
 };
 </script>

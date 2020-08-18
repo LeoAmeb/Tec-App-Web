@@ -1,4 +1,6 @@
 import Home from "./components/HomeComponent.vue";
+import DashboardComponent from "./components/DashboardComponent.vue";
+
 import ExampleComponent from "./components/ExampleComponent.vue";
 import BrowserComponent from "./components/BrowserComponent.vue";
 //Vistas de clientes
@@ -25,6 +27,10 @@ import ClienteMicrositioEditar from "./components/cliente-micrositio/Clientehasm
 //Vistas de la pagina del micrositio
 import MicrositioComponent from "./components/micrositio/MicrositioComponent.vue";
 import POS from "./components/pos/PosComponent.vue";
+
+
+import Venta from "./components/Ventas-single.vue";
+import Ventas from "./components/Ventas-list.vue";
 
 export const routes = [
     {
@@ -55,11 +61,25 @@ export const routesAdmin = [
         name: "logout",
         route: "logout"
     },
-    
+    {
+        name: "dash",
+        path: "/admin/",
+        component: DashboardComponent
+    },
     {
         name: "pos",
         path: "/admin/pos",
         component: POS
+    },
+    {
+        name: "ventas",
+        path: "/admin/ventas",
+        component: Ventas
+    },
+    {
+        name: "ventas-s",
+        path: "/admin/venta/:id",
+        component: Venta
     },
     {
         name: "clientes",
