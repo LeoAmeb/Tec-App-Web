@@ -1,31 +1,17 @@
 import Home from "./components/HomeComponent.vue";
 import DashboardComponent from "./components/DashboardComponent.vue";
-
 import ExampleComponent from "./components/ExampleComponent.vue";
-import BrowserComponent from "./components/BrowserComponent.vue";
 //Vistas de clientes
 import ClientesList from "./components/clientes/Clientes-list.vue";
 import ClientesEditar from "./components/clientes/Clientes-single.vue";
-//Vistas de micrositios
-import MicrositiosList from "./components/micrositios/Micrositios-list.vue";
-import MicrositiosEditar from "./components/micrositios/Micrositios-single.vue";
 //Vistas de productos
 import ProductosList from "./components/productos/Products-list.vue";
 import ProductosEditar from "./components/productos/Products-single.vue";
-//Vistas de servicios
-import ServiciosList from "./components/servicios/Servicios-list.vue";
-import ServiciosEditar from "./components/servicios/Servicios-single.vue";
-//Vistas de usuarios
-import UsersList from "./components/users/Users-list.vue";
-import UsersEditar from "./components/users/Users-single.vue";
 //Vistas de categorias
 import CategoriasList from "./components/categorias/Categorias-list.vue";
 import CategoriasEditar from "./components/categorias/Categorias-single.vue";
-//Vistas de cliente-micrositio
-import ClienteMicrositioList from "./components/cliente-micrositio/Clientehasmicrositios-list.vue";
-import ClienteMicrositioEditar from "./components/cliente-micrositio/Clientehasmicrositios-single.vue";
-//Vistas de la pagina del micrositio
-import MicrositioComponent from "./components/micrositio/MicrositioComponent.vue";
+
+
 import POS from "./components/pos/PosComponent.vue";
 
 
@@ -48,11 +34,6 @@ export const routes = [
         name: "logout",
         route: "logout"
     }
-    /*{
-        name: "micrositio-page",
-        path: "/micrositio/:id/",
-        component: MicrositioComponent
-    }*/
 ];
 
 export const routesAdmin = [
@@ -94,18 +75,6 @@ export const routesAdmin = [
         component: ClientesEditar
     },
     {
-        name: "micrositios",
-        path: "/admin/micrositios/",
-        props: true,
-        component: MicrositiosList
-    },
-    {
-        name: "micrositiosEditar",
-        path: "/admin/micrositio/:id",
-        props: true,
-        component: MicrositiosEditar
-    },
-    {
         name: "productos",
         path: "/admin/products/",
         props: true,
@@ -118,30 +87,6 @@ export const routesAdmin = [
         component: ProductosEditar
     },
     {
-        name: "servicios",
-        path: "/admin/servicios/",
-        props: true,
-        component: ServiciosList
-    },
-    {
-        name: "serviciosEditar",
-        path: "/admin/servicio/:id",
-        props: true,
-        component: ServiciosEditar
-    },
-    {
-        name: "users",
-        path: "/admin/users/",
-        props: true,
-        component: UsersList
-    },
-    {
-        name: "usersEditar",
-        path: "/admin/user/:id",
-        props: true,
-        component: UsersEditar
-    },
-    {
         name: "categorias",
         path: "/admin/categorias/",
         props: true,
@@ -152,18 +97,6 @@ export const routesAdmin = [
         path: "/admin/categoria/:id",
         props: true,
         component: CategoriasEditar
-    },
-    {
-        name: "cliente-micrositio",
-        path: "/admin/cliente-micrositio",
-        props: true,
-        component: ClienteMicrositioList
-    },
-    {
-        name: "cliente-micrositioEditar",
-        path: "/admin/cliente-micrositio/:id",
-        props: true,
-        component: ClienteMicrositioEditar
     }
 ];
 
